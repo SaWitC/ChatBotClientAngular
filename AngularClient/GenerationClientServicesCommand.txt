@@ -1,0 +1,1 @@
+java -jar swagger-codegen-cli-OA3.jar generate -i http://localhost:5126/swagger/BotServer/swagger.json -l typescript-angular -o src/app/core/services/swagger-gen -c helper/option.json
