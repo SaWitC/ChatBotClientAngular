@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-3">
+    
+  </div>
+
+  <div class="col-6">
+    <h3>Chats:</h3>
+
+    <div class="row" *ngFor="let chat of this.CurentPage">
+      <div class="bg-danger col-3">
+
+      </div>
+      <div class="bg-dark col-9">
+        <button class="form-control btn bg-dark text-white" [routerLink]="['ChatDetails',chat.id]">{{chat.title}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-3">
+
+  </div>
+</div>

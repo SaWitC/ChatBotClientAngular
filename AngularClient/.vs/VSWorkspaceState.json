@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\Components",
+    "\\src\\app\\Components\\SignalR",
+    "\\src\\app\\Components\\SignalR\\chathub",
+    "\\src\\app\\Models",
+    "\\src\\app\\Models\\Message",
+    "\\src\\app\\Models\\Message\\MessageShort",
+    "\\src\\app\\Services"
   ],
-  "SelectedNode": "\\package.json",
   "PreviewInSolutionExplorer": false
 }
