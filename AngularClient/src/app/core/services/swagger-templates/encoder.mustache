@@ -1,5 +1,11 @@
+{{#useHttpClient}}
     import { HttpUrlEncodingCodec } from '@angular/common/http';
+{{/useHttpClient}}
+{{^useHttpClient}}
+    import { QueryEncoder } from '@angular/http';
+{{/useHttpClient}}
 
+{{#useHttpClient}}
 /**
 * CustomHttpUrlEncodingCodec
 * Fix plus sign (+) not encoding, so sent as blank space
@@ -15,3 +21,4 @@ export class CustomHttpUrlEncodingCodec extends HttpUrlEncodingCodec {
         return v.replace(/\+/gi, '%2B');
     }
 }
+{{/useHttpClient}}

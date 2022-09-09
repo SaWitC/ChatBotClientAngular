@@ -4,12 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\SignalR",
-    "\\src\\app\\Components\\SignalR\\chathub",
-    "\\src\\app\\Models",
-    "\\src\\app\\Models\\Message",
-    "\\src\\app\\Models\\Message\\MessageShort",
-    "\\src\\app\\Services"
+    "\\src\\app\\Components\\Chat",
+    "\\src\\app\\Components\\Chat\\my-chats",
+    "\\src\\app\\core",
+    "\\src\\app\\core\\services",
+    "\\src\\app\\core\\services\\swagger-gen",
+    "\\src\\app\\core\\services\\swagger-gen\\api"
   ],
+  "SelectedNode": "\\src\\app\\Components\\Chat\\details\\details.component.html",
   "PreviewInSolutionExplorer": false
 }

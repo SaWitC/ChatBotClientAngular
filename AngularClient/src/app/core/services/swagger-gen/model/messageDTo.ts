@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
-export interface CreateChatCommand { 
-    title?: string;
+export interface MessageDTo { 
+    user?: string;
+    msgText?: string;
 }

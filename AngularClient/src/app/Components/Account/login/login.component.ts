@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ApiModule } from '../../../core/services/swagger-gen';
 import { AccountService } from '../../../core/services/swagger-gen/api/account.service'
 import { LoginCommand } from '../../../core/services/swagger-gen/model/loginCommand'
+import { CustomAccountService } from '../../../Services/Account/custom-account.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   public Submited: boolean = false;
   ngOnInit(): void {
+    this.AccountService.configuration.basePath ="localhost:7126/"
   }
 
   public login(form: NgForm) {

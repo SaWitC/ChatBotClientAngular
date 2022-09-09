@@ -150,19 +150,14 @@ export class ChatService {
     /**
      * get Details about chat
      * 
-     * @param page 
      * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public details(page: number, id: string, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public details(page: number, id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public details(page: number, id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public details(page: number, id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling details.');
-        }
+    public details(id: string, observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public details(id: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public details(id: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public details(id: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling details.');
@@ -185,7 +180,7 @@ export class ChatService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Response>('get',`${this.basePath}/api/Chat/Details/${encodeURIComponent(String(page))}&${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<Response>('get',`${this.basePath}/api/Chat/Details/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

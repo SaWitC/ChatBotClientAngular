@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { MessageDto } from '../../../Models/Messages/message-dto.model';
 import { Observable, Subject } from 'rxjs';
 import { MessageShort } from '../../../Models/Message/MessageShort/message-short.model';
+import { Message } from '../../../Models/Message/message.model';
 
 @Injectable({
   providedIn: 'root'
@@ -78,7 +79,9 @@ export class ChatService {
   //}
 
 
-  public MessagesHistory: MessageShort[]=[];
+  //public MessagesHistory: MessageShort[] = [];
+  public MessagesHistory: Message[] = [];
+
   hubConnection: signalR.HubConnection;
 
   startConnection = () => {
@@ -113,8 +116,10 @@ export class ChatService {
   askServerListener() {
     this.hubConnection.on("askServerResponse", (someText) => {
 
-      var message = new MessageShort();
-      message.title = someText;
+      //var message = new MessageShort();
+      var message = new Message();
+
+      message.text = someText;
       message.isFromBot = true;
       this.MessagesHistory.push(message);
 

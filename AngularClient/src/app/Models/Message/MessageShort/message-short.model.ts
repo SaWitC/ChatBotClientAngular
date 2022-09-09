@@ -1,4 +1,5 @@
 export class MessageShort {
-  public title: string;
+  public text: string;
   public isFromBot: boolean;
+  public created: string;
 }

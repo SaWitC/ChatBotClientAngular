@@ -4,8 +4,8 @@ export class Message {
     public id :string
     public text :string
     public avtroId: string
-    public ParentId: string
+    public parentId: string
     public chat: Chat;
-    public IsFromBot: boolean; 
-    public Created :string
+    public isFromBot: boolean; 
+    public created :string
 }

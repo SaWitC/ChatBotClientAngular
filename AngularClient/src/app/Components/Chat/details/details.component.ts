@@ -6,7 +6,9 @@ import { NgForm } from '@angular/forms';
 import { Subscription, switchMap } from 'rxjs';
 import { MessageDto } from '../../../Models/Messages/message-dto.model';
 import { MessageShort } from '../../../Models/Message/MessageShort/message-short.model';
-import { Message } from '../../../Models/Message/message.model';
+import { Message} from '../../../Models/Message/message.model';
+import { ChatDetails } from '../../../Models/Chat/Details/chat-details.model';
+import { MessageService } from '../../../core/services/swagger-gen';
 
 
 @Component({
@@ -18,13 +20,12 @@ export class DetailsComponent implements OnInit {
 
   id: string;
   private subscription: Subscription;
+  public CurentChat: ChatDetails = new ChatDetails();
   
 
   msgText: string;
-  constructor(private chatService: ChatService, public chatHubService: ChatHubService.ChatService, private activateRoute: ActivatedRoute) {
+  constructor(private chatService: ChatService, public chatHubService: ChatHubService.ChatService, private activateRoute: ActivatedRoute, private messageService: MessageService) {
 
-    //var res = chatService.details();
-    //this.chatHubService.MessagesHistory = res as MessageShort[];
     //this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
     setTimeout(() => {
       this.chatHubService.askServerListener();
@@ -37,28 +38,53 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.chatHubService.startConnection();
     this.id = this.activateRoute.snapshot.params['id'];
-    
-  }
 
-  SendMessage(form: NgForm) {
+    this.chatService.details(this.id).subscribe
+      (res => {
+        console.log(res)
+        console.log(this.CurentChat)
+        this.CurentChat = res as ChatDetails;
+        console.log(this.CurentChat)
+      },
+        err => { console.log(err) }
+    );
 
-    //var message = form.value.message;
-    //console.log("send "+message);
-    //console.log(this.msgDto.msgText)
-    //if (this.id != null && this.msgDto.msgText.length > 0) {
-    //  this.chatHubService.askServer(this.msgDto.msgText, this.id);
-    //}
+    setTimeout(() => {
+      console.log("1");
+      this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
+
+      this.CurentChat.page = this.CurentChat.page - 1;
+      console.log(this.CurentChat.page)
+    }, 1000)
+   
   }
 
   send(): void {
-    var Message = new MessageShort();
-    Message.title = this.msgText;
-    Message.isFromBot = false;
+    //var Message = new MessageShort();
+    var message = new Message();
+    message.text = this.msgText;
+    message.isFromBot = false;
 
-    this.chatHubService.MessagesHistory.push(Message)
+    this.chatHubService.MessagesHistory.push(message)
     console.log(this.chatHubService.MessagesHistory);
 
     this.chatHubService.askServer(this.msgText, this.id);
+  }
+
+  LoadOld() {
+    this.CurentChat.page = this.CurentChat.page - 1
+    console.log(this.CurentChat.page);
+    this.messageService.getMessages(this.CurentChat.page, this.CurentChat.id).subscribe(res => {
+      console.log(res)
+      var mess = res as Message[];
+      mess = mess.reverse();
+
+
+      this.chatHubService.MessagesHistory = mess.reverse().concat(this.chatHubService.MessagesHistory);
+    },
+      err =>{
+        console.log(err);
+    });
   }
 
 }

@@ -4,11 +4,14 @@
   <div class="col-6 bg-dark text-white">
     <h3 class="text-center">Messages</h3>
 
-    <div *ngFor="let message of this.chatHubService.MessagesHistory">
-      <div class="bg-warning" *ngIf="message.isFromBot;else user">{{message.title}}</div>
+    <button (click)="LoadOld()">load old</button>
+    <div style="overflow-x: scroll; height:200px">
+      <div *ngFor="let message of this.chatHubService.MessagesHistory">
+        <div class="bg-warning" *ngIf="message.isFromBot;else user">{{message.text}}</div>
 
-      <ng-template #user><div class="bg-danger">{{message.title}}</div></ng-template>
+        <ng-template #user><div class="bg-danger">{{message.text}}</div></ng-template>
 
+      </div>
     </div>
     <div>
       <form #form="ngForm" (ngSubmit)="send()" class="form-group">

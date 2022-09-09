@@ -18,7 +18,6 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { Response } from '../model/response';
-import { SendMessageDTO } from '../model/sendMessageDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +26,7 @@ import { Configuration }                                     from '../configurat
 @Injectable()
 export class MessageService {
 
-    protected basePath = '/';
+  protected basePath = 'https://localhost:7126';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -147,24 +146,24 @@ export class MessageService {
     }
 
     /**
-     * Login in sustem
+     * get messages
      * 
      * @param page 
      * @param chatid 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public login(page: number, chatid: string, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public login(page: number, chatid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public login(page: number, chatid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public login(page: number, chatid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getMessages(page: number, chatid: string, observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public getMessages(page: number, chatid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public getMessages(page: number, chatid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public getMessages(page: number, chatid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (page === null || page === undefined) {
-            throw new Error('Required parameter page was null or undefined when calling login.');
+            throw new Error('Required parameter page was null or undefined when calling getMessages.');
         }
 
         if (chatid === null || chatid === undefined) {
-            throw new Error('Required parameter chatid was null or undefined when calling login.');
+            throw new Error('Required parameter chatid was null or undefined when calling getMessages.');
         }
 
         let headers = this.defaultHeaders;
@@ -186,54 +185,6 @@ export class MessageService {
 
         return this.httpClient.request<Response>('get',`${this.basePath}/api/Message/${encodeURIComponent(String(page))}&${encodeURIComponent(String(chatid))}`,
             {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Login in sustem
-     * 
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public login_1(body?: SendMessageDTO, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public login_1(body?: SendMessageDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public login_1(body?: SendMessageDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public login_1(body?: SendMessageDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json',
-            'text/json',
-            'application/_*+json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<Response>('post',`${this.basePath}/api/Message`,
-            {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

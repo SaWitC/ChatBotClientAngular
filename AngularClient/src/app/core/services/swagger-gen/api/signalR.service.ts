@@ -17,18 +17,16 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { LoginCommand } from '../model/loginCommand';
-import { RegistrationCommand } from '../model/registrationCommand';
-import { Response } from '../model/response';
+import { MessageDTo } from '../model/messageDTo';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class AccountService {
+export class SignalRService {
 
-  public basePath = 'https://localhost:7126';
+    protected basePath = '/';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
@@ -58,73 +56,22 @@ export class AccountService {
 
 
     /**
-     * Login in sustem
+     * 
      * 
      * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public login(body?: LoginCommand, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public login(body?: LoginCommand, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public login(body?: LoginCommand, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public login(body?: LoginCommand, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public apiChatSendPost(body?: MessageDTo, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiChatSendPost(body?: MessageDTo, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiChatSendPost(body?: MessageDTo, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public apiChatSendPost(body?: MessageDTo, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json',
-            'text/json',
-            'application/_*+json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-      }
-      //console.log(this.basePath);
-        return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Login`,
-          {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Register new user
-     * 
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public register(body?: RegistrationCommand, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public register(body?: RegistrationCommand, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public register(body?: RegistrationCommand, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public register(body?: RegistrationCommand, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'text/plain',
-            'application/json',
-            'text/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -142,7 +89,7 @@ export class AccountService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Register`,
+        return this.httpClient.request<any>('post',`${this.basePath}/api/chat/Send`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
