@@ -1,22 +1,29 @@
-<div class="row">
-  <div class="col-3">
-    
+
+<h3 class="text-center text-white">Chats</h3>
+
+<!--<div class="row" *ngFor="let chat of this.CurentPage">
+  <div class="bg-danger col-2">
+    <span class="circle"></span>
   </div>
+  <div class="bg-dark col-10">
+    <button class="form-control btn bg-darkpurple-gradient text-white" [routerLink]="['ChatDetails',chat.id]"></button>
+  </div>
+</div>-->
 
-  <div class="col-6">
-    <h3>Chats:</h3>
 
-    <div class="row" *ngFor="let chat of this.CurentPage">
-      <div class="bg-danger col-3">
+<div *ngFor="let chat of this.CurentPage" class="card mb-3">
+  <a [routerLink]="['ChatDetails',chat.id]">
+    <div class="card-body">
+      <div class="d-flex flex-start">
+        <img class="rounded-circle shadow-1-strong me-3" src="https://png.pngtree.com/png-vector/20191023/ourlarge/pngtree-vector-moon-icon-png-image_1852023.jpg" alt="avatar" width="40" height="40">
+        <div class="w-100">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="text-primary fw-bold mb-0">{{chat.title}}</h6>
 
-      </div>
-      <div class="bg-dark col-9">
-        <button class="form-control btn bg-dark text-white" [routerLink]="['ChatDetails',chat.id]">{{chat.title}}</button>
+          </div>
+          <p class="mb-0">{{chat.created}}</p>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-3">
-
-  </div>
+  </a>
 </div>

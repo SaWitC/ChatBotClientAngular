@@ -1,14 +1,30 @@
-<div class="btn-group bg-dark">
-  <button routerLink="Login" class="btn bg-info">Login</button>
-  <button routerLink="Chat" class="btn bg-info">Chat</button>
-  <button routerLink="MyChats" class="btn bg-info">MyChats</button>
-  <button routerLink="CreateChat" class="btn bg-info">CreateChat</button>
+<div class="row">
+  <
+  <div class="col-md-4"></div>
 
+  <div class="col-md-4">
+    <div class="card-custom row">
 
-</div>
+      <div class="col-12">
+        <div style="display:flex;" class="">
+          <button routerLink="Login" class="m-auto btn bg-custom">Login</button>
+          <button routerLink="Chat" class="m-auto btn bg-custom">Register</button>
+          <button routerLink="MyChats" class="m-auto btn bg-custom">MyChats</button>
+          <button routerLink="CreateChat" class="m-auto btn bg-custom">CreateChat</button>
+        </div>
+      </div>
 
-<div>
-  <div>
-    <router-outlet></router-outlet>
+      <div class="col-12">
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <div class="col-md-4"></div>
+
 </div>
+
+

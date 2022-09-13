@@ -71,6 +71,17 @@ export class DetailsComponent implements OnInit {
     this.chatHubService.askServer(this.msgText, this.id);
   }
 
+  ReplaceAll(text: string) {
+    var res = text.replace(/"/g, '');
+    console.log(res);
+    return res;
+  }
+
+  RenderHtml(obj, text) {
+    obj.innerHtml = text;
+    console.log(obj)
+  }
+
   LoadOld() {
     this.CurentChat.page = this.CurentChat.page - 1
     console.log(this.CurentChat.page);

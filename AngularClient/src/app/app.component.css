@@ -1,0 +1,18 @@
+.sideb {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+
+.card-custom{
+    background-color:#210267;
+    border-radius:20px;
+    width:400px;
+    height:100vh;
+    border:solid 5px#1c015a;
+}
+
+.bg-custom{
+    background-color:#a49fe6;
+}

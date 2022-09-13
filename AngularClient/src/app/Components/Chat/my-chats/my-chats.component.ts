@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../../core/services/swagger-gen';
 import { Chat } from '../../../Models/Chat/chat.model';
+import { } from '../../../../../src/wwwroot/';
 
 @Component({
   selector: 'app-my-chats',
