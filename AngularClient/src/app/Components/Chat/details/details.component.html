@@ -3,20 +3,30 @@
 
   <div class="col-6 bg-dark text-white">-->
     <h3 class="text-center text-white">Messages</h3>
+    
 
     <button (click)="LoadOld()">load old</button>
-<div class="text-white">
+    <div class="text-white">
       <div style="overflow-x:hidden; height:60vh">
-        <div *ngFor="let message of this.chatHubService.MessagesHistory">
-          <!--<div class="Dark-blue" *ngIf="message.isFromBot;else user" [innerHTML]="message.text">
-      </div>-->
+
+        <div *ngFor="let message of this.chatHubService.MessagesHistory;let last =last">
 
           <div *ngIf="message.isFromBot;else user">
             <div class="card-body row text-right Bot-msg border-rad-80px m-2">
               <div class="col-9">
-                <div class=" p-2 justify-content-between align-items-center mb-3" [innerHTML]="message.text">
+                <div *ngIf='last && message.text.includes("date");else nodatepicker'>
+                  <div class="p-2 justify-content-between align-items-center mb-3" [innerHTML]="message.text">
 
+                  </div>
+                  <input [ngModel]="date" type="date" (ngModelChange)="DateChange($event)" />
+                  <input type="time" [ngModel]="time" (ngModelChange)="TimeChange($event)" />
                 </div>
+
+                <ng-template #nodatepicker>
+                  <div class=" p-2 justify-content-between align-items-center mb-3" [innerHTML]="message.text">
+
+                  </div>
+                </ng-template>
               </div>
               <div class="col-3">
                 <img class="rounded-circle shadow-1-strong me-3" src="https://png.pngtree.com/png-vector/20191023/ourlarge/pngtree-vector-moon-icon-png-image_1852023.jpg" alt="avatar" width="40" height="40">
@@ -59,8 +69,12 @@
         </form>
       </div>
 
-</div>
+      <!--<input  [matDatepicker]="basicDatepicker" [ngModel]="dateTime">
+      <mat-datepicker-toggle [for]="basicDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #basicDatepicker></mat-datepicker>-->
+    </div>
   <!--</div>
 
   <div class="col-3 bg-info"></div>
 </div>-->
+

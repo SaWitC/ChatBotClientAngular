@@ -8,13 +8,16 @@ import { MessageDto } from '../../../Models/Messages/message-dto.model';
 import { Observable, Subject } from 'rxjs';
 import { MessageShort } from '../../../Models/Message/MessageShort/message-short.model';
 import { Message } from '../../../Models/Message/message.model';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private sanitizer: DomSanitizer
+  ) {
     //this.connection.onclose(async () => {
     //  await this.start();
     //});
@@ -25,61 +28,9 @@ export class ChatService {
   ngOnInit(): void {
   }
 
-  //private connection2: any = new signalR.HubConnectionBuilder().withUrl("https://localhost:7126/chat")   // mapping to the chathub as in startup.cs
-  //  .configureLogging(signalR.LogLevel.Information)  
-  //  .build();
 
+  public lastMessageFromBot: SafeHtml;
 
-
-  //connection = new signalR.HubConnectionBuilder()
-  //  .configureLogging(signalR.LogLevel.Debug)
-  //  .withUrl("https://localhost:7126/chat", {
-  //    skipNegotiation: true,
-  //    transport: signalR.HttpTransportType.WebSockets
-  //  })
-  //  .build();
-
-
-  //readonly POST_URL = "https://localhost:7126/api/chat/Send"
-
-  ////public send() {
-  ////  this.messageService.
-  ////}
-
-  //private receivedMessageObject: MessageDto = new MessageDto();
-  //private sharedObj = new Subject<MessageDto>();
-
-
-  //public async start() {
-  //  try {
-  //    await this.connection.start();
-  //    console.log("connected");
-  //  } catch (err) {
-  //    console.log(err);
-  //    setTimeout(() => this.start(), 5000);
-  //  }
-  //}
-
-  //private mapReceivedMessage(user: string, message: string): void {
-  //  this.receivedMessageObject.user = user;
-  //  this.receivedMessageObject.msgText = message;
-  //  this.sharedObj.next(this.receivedMessageObject);
-  //}
-
-  ///* ****************************** Public Mehods **************************************** */
-
-  //// Calls the controller method
-  //public broadcastMessage(msgDto: any) {
-  //  this.http.post(this.POST_URL, msgDto).subscribe(data => console.log(data));
-  //  // this.connection.invoke("SendMessage1", msgDto.user, msgDto.msgText).catch(err => console.error(err));    // This can invoke the server method named as "SendMethod1" directly.
-  //}
-
-  //public retrieveMappedObject(): Observable<MessageDto> {
-  //  return this.sharedObj.asObservable();
-  //}
-
-
-  //public MessagesHistory: MessageShort[] = [];
   public MessagesHistory: Message[] = [];
 
   hubConnection: signalR.HubConnection;
@@ -122,6 +73,7 @@ export class ChatService {
       message.text = someText;
       message.isFromBot = true;
       this.MessagesHistory.push(message);
+      this.lastMessageFromBot = this.sanitizer.bypassSecurityTrustHtml(message.text);
 
       console.log(someText);
       return someText;

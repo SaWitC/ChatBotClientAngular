@@ -6,13 +6,18 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/Account/login/login.component';
 import { ApiModule, ChatService } from './core/services/swagger-gen';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsComponent } from './Components/Chat/details/details.component';
 import { ChathubComponent } from './Components/SignalR/chathub/chathub.component';
 import { AuthGuardService } from './Guards/Auth/AuthGard/auth-guard.service';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { CreateComponent } from './Components/Chat/create/create.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule } from '@angular/material/core';
+import { RegisterComponent } from './Components/Account/register/register.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -25,9 +30,16 @@ export function tokenGetter() {
     DetailsComponent,
     ChathubComponent,
     MyChatsComponent,
-    CreateComponent
+    CreateComponent,
+    RegisterComponent
   ],
   imports: [
+
+    //MatButtonModule,
+    //MatIconModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -40,6 +52,7 @@ export function tokenGetter() {
         disallowedRoutes:[],
       }
     }),
+    BrowserAnimationsModule,
   ],
   providers: [ChatService, AuthGuardService],
   bootstrap: [AppComponent]

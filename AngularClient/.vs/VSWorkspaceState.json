@@ -6,12 +6,10 @@
     "\\src\\app\\Components",
     "\\src\\app\\Components\\Account",
     "\\src\\app\\Components\\Account\\login",
-    "\\src\\app\\Components\\Chat",
-    "\\src\\app\\Components\\Chat\\create",
-    "\\src\\app\\Components\\Chat\\details",
-    "\\src\\app\\Components\\Chat\\my-chats",
+    "\\src\\app\\Services\\Validation",
+    "\\src\\app\\Services\\Validation\\AccountValidators",
     "\\src\\wwwroot"
   ],
-  "SelectedNode": "\\src\\app\\app.component.html",
+  "SelectedNode": "\\src\\app\\Components\\Account\\login\\login.component.html",
   "PreviewInSolutionExplorer": false
 }
