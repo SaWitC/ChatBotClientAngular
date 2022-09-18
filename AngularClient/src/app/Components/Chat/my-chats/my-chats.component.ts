@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../../../core/services/swagger-gen';
 import { Chat } from '../../../Models/Chat/chat.model';
+import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
 
 @Component({
   selector: 'app-my-chats',
@@ -9,7 +10,7 @@ import { Chat } from '../../../Models/Chat/chat.model';
 })
 export class MyChatsComponent implements OnInit {
 
-  constructor(public chatService: ChatService) { }
+  constructor(public chatService: CustomChatService) { }
 
   public CurentPage:Chat[];
 

@@ -4,19 +4,25 @@
 
   <div class="col-md-4">
     <div class="card-custom row">
-
       <div class="col-12">
         <div style="display:flex;" class="">
-          <button routerLink="Login" class="m-auto btn bg-custom">Login</button>
-          <button routerLink="Register" class="m-auto btn bg-custom">Register</button>
-          <button routerLink="MyChats" class="m-auto btn bg-custom">MyChats</button>
-          <button routerLink="CreateChat" class="m-auto btn bg-custom">CreateChat</button>
+          <button routerLink="" (click)="DeactiveOutlet()" class="m-auto btn bg-custom">Login</button>
+          <button routerLink="Register" (click)="ActiveOutlet()" class="m-auto btn bg-custom">Register</button>
+          <button routerLink="MyChats" (click)="ActiveOutlet()" class="m-auto btn bg-custom">MyChats</button>
+          <button routerLink="CreateChat" (click)="ActiveOutlet()" class="m-auto btn bg-custom">CreateChat</button>
         </div>
       </div>
 
       <div class="col-12">
         <div>
-          <router-outlet></router-outlet>
+
+          <div *ngIf="isActivOutlet;else login">
+            <router-outlet></router-outlet>
+          </div>
+          <ng-template #login>
+            <app-login (onChanged)="onChanged($event)"></app-login>
+          </ng-template>
+
         </div>
       </div>
 

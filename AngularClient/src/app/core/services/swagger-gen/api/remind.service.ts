@@ -17,8 +17,6 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { LoginCommand } from '../model/loginCommand';
-import { RegistrationCommand } from '../model/registrationCommand';
 import { Response } from '../model/response';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -26,7 +24,7 @@ import { Configuration }                                     from '../configurat
 
 
 @Injectable()
-export class AccountService {
+export class RemindService {
 
     protected basePath = '/';
     public defaultHeaders = new HttpHeaders();
@@ -58,17 +56,15 @@ export class AccountService {
 
 
     /**
-     * Login in sustem
+     * get reminds
      * 
-     * @param body 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public login(body?: LoginCommand, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public login(body?: LoginCommand, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public login(body?: LoginCommand, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public login(body?: LoginCommand, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
+    public getActualAndExpiredReminds(observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public getActualAndExpiredReminds(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public getActualAndExpiredReminds(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public getActualAndExpiredReminds(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -85,18 +81,10 @@ export class AccountService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json',
-            'text/json',
-            'application/_*+json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Login`,
+        return this.httpClient.request<Response>('get',`${this.basePath}/api/Remind/GetActualAndExpired`,
             {
-                body: body,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
@@ -106,17 +94,22 @@ export class AccountService {
     }
 
     /**
-     * Register new user
+     * Remove reminder
      * 
-     * @param body 
+     * @param id 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public register(body?: RegistrationCommand, observe?: 'body', reportProgress?: boolean): Observable<Response>;
-    public register(body?: RegistrationCommand, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
-    public register(body?: RegistrationCommand, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
-    public register(body?: RegistrationCommand, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public removeReminder(id?: string, observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public removeReminder(id?: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public removeReminder(id?: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public removeReminder(id?: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (id !== undefined && id !== null) {
+            queryParameters = queryParameters.set('Id', <any>id);
+        }
 
         let headers = this.defaultHeaders;
 
@@ -133,18 +126,11 @@ export class AccountService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/json',
-            'text/json',
-            'application/_*+json'
         ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
 
-        return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Register`,
+        return this.httpClient.request<Response>('get',`${this.basePath}/api/Remind/RemoveReminder`,
             {
-                body: body,
+                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,

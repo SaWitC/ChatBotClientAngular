@@ -4,12 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/Account/login/login.component';
-import { ApiModule, ChatService } from './core/services/swagger-gen';
+import { ApiModule, ChatService, Configuration } from './core/services/swagger-gen';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DetailsComponent } from './Components/Chat/details/details.component';
-import { ChathubComponent } from './Components/SignalR/chathub/chathub.component';
 import { AuthGuardService } from './Guards/Auth/AuthGard/auth-guard.service';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { CreateComponent } from './Components/Chat/create/create.component';
@@ -18,6 +17,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { RegisterComponent } from './Components/Account/register/register.component';
+import { RemindCustomService } from './Services/Commands/Remind/remind.service';
+import { CustomChatService } from './Services/Chat/Chat/custom-chat.service';
+import { botServerDomain } from '../../env';
+import { CustomMessagesService } from './Services/Chat/Message/custom-messages.service';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -28,7 +31,6 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     DetailsComponent,
-    ChathubComponent,
     MyChatsComponent,
     CreateComponent,
     RegisterComponent
@@ -48,13 +50,13 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ["localhost:7126"],
+        allowedDomains: [botServerDomain],
         disallowedRoutes:[],
       }
     }),
     BrowserAnimationsModule,
   ],
-  providers: [ChatService, AuthGuardService],
+  providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

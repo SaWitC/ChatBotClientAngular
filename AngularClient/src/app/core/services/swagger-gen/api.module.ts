@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AccountService } from './api/account.service';
 import { ChatService } from './api/chat.service';
 import { MessageService } from './api/message.service';
+import { RemindService } from './api/remind.service';
 import { SignalRService } from './api/signalR.service';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { SignalRService } from './api/signalR.service';
     AccountService,
     ChatService,
     MessageService,
+    RemindService,
     SignalRService ]
 })
 export class ApiModule {

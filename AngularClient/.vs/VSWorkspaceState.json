@@ -4,12 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Account",
-    "\\src\\app\\Components\\Account\\login",
-    "\\src\\app\\Services\\Validation",
-    "\\src\\app\\Services\\Validation\\AccountValidators",
-    "\\src\\wwwroot"
+    "\\src\\app\\Components\\Chat",
+    "\\src\\app\\Components\\Chat\\my-chats",
+    "\\src\\app\\Services",
+    "\\src\\app\\Services\\Chat",
+    "\\src\\app\\Services\\Chat\\Chat",
+    "\\src\\app\\Services\\Chat\\Message"
   ],
-  "SelectedNode": "\\src\\app\\Components\\Account\\login\\login.component.html",
+  "SelectedNode": "\\src\\app\\Services\\Chat\\Chat\\custom-chat.service.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -1,32 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { MessageService } from '../../../core/services/swagger-gen/api/message.service'
 //import * as signalR from '@microsoft/signalr';
 import * as signalR from '@aspnet/signalr'
 import { HttpClient } from '@angular/common/http';
-import { MessageDto } from '../../../Models/Messages/message-dto.model';
-import { Observable, Subject } from 'rxjs';
-import { MessageShort } from '../../../Models/Message/MessageShort/message-short.model';
 import { Message } from '../../../Models/Message/message.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { ChatService, Configuration } from '../../../core/services/swagger-gen';
+import { protocol_botServerDomain } from '../../../../../env';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService {
+export class CustomChatService extends ChatService {
 
-  constructor(private http: HttpClient,
-    private sanitizer: DomSanitizer
-  ) {
-    //this.connection.onclose(async () => {
-    //  await this.start();
-    //});
-    //this.connection.on("Notify", (user, message) => { this.mapReceivedMessage(user, message); });
-    //this.start();
+  public override configuration = new Configuration();
+
+  constructor(override httpClient: HttpClient, @Optional() configuration: Configuration, private sanitizer: DomSanitizer) {
+    super(httpClient, protocol_botServerDomain, configuration);
   }
 
-  ngOnInit(): void {
-  }
+  //constructor(private http: HttpClient,
+  //  private sanitizer: DomSanitizer
+  //) {
+  //  //this.connection.onclose(async () => {
+  //  //  await this.start();
+  //  //});
+  //  //this.connection.on("Notify", (user, message) => { this.mapReceivedMessage(user, message); });
+  //  //this.start();
+  //}
 
 
   public lastMessageFromBot: SafeHtml;

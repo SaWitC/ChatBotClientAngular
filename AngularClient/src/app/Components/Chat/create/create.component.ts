@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ChatService } from '../../../core/services/swagger-gen';
+import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
 
 @Component({
   selector: 'app-create',
@@ -10,7 +11,7 @@ import { ChatService } from '../../../core/services/swagger-gen';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(public chatService: ChatService) { }
+  constructor(public chatService: CustomChatService) { }
 
   ngOnInit(): void {
   }

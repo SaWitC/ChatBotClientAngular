@@ -4,15 +4,15 @@ import { LoginComponent } from './Components/Account/login/login.component';
 import { CreateComponent } from './Components/Chat/create/create.component';
 import { DetailsComponent } from './Components/Chat/details/details.component';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
-import { ChathubComponent } from './Components/SignalR/chathub/chathub.component';
 import { AuthGuardService } from './Guards/Auth/AuthGard/auth-guard.service';
 import { RegisterComponent } from './Components/Account/register/register.component';
+import { AppComponent } from './app.component';
 
-const routes: Routes = [{ component: LoginComponent, path: "Login" },
-{ component: ChathubComponent, path: "Chat", canActivate: [AuthGuardService] },
+const routes: Routes = [/*{ component: LoginComponent, path: "Login" },*/
   { component: MyChatsComponent, path: "MyChats", canActivate: [AuthGuardService] },
   { component: CreateComponent, path: "CreateChat", canActivate: [AuthGuardService] },
   { component: DetailsComponent, path: "MyChats/ChatDetails/:id", canActivate: [AuthGuardService] },
+ /* { component: AppComponent, path: "",  },*/
   { component: RegisterComponent, path:"Register" }];
 
 @NgModule({

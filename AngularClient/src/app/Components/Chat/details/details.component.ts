@@ -10,6 +10,8 @@ import { Message} from '../../../Models/Message/message.model';
 import { ChatDetails } from '../../../Models/Chat/Details/chat-details.model';
 import { MessageService } from '../../../core/services/swagger-gen';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
+import { CustomMessagesService } from '../../../Services/Chat/Message/custom-messages.service';
 
 @Component({
   selector: 'app-details',
@@ -22,11 +24,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 export class DetailsComponent implements OnInit {
 
-  //myForm: FormGroup = new FormGroup({
-
-  //  "msgText": new FormControl(),
-
-  //});
 
   id: string;
   private subscription: Subscription;
@@ -36,9 +33,9 @@ export class DetailsComponent implements OnInit {
   
 
   msgText: string;
-  constructor(private chatService: ChatService, public chatHubService: ChatHubService.ChatService,
+  constructor(private chatService: CustomChatService, public chatHubService: ChatHubService.CustomChatService,
     private activateRoute: ActivatedRoute,
-    private messageService: MessageService,
+    private messageService: CustomMessagesService,
     public domSanitizer: DomSanitizer  ) {
 
     //this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
@@ -73,14 +70,6 @@ export class DetailsComponent implements OnInit {
       this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
       let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
 
-
-
-
-      //let position = lastElementFromArray.text.indexOf('type="date')
-      //if (position > 0) {
-      //  lastElementFromArray.text = [lastElementFromArray.text.slice(0, position+11), '#date name="date" (ngModelChange)="onChange($event)"', lastElementFromArray.text.slice(position+11)].join('');
-      //}
-
       this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
 
       this.CurentChat.page = this.CurentChat.page - 1;
@@ -89,7 +78,6 @@ export class DetailsComponent implements OnInit {
   }
 
   send(): void {
-    //var Message = new MessageShort();
     var message = new Message();
     message.text = this.msgText;
     message.isFromBot = false;

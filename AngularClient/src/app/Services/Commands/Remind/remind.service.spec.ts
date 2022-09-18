@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CustomChatService } from './chat.service';
+import { RemindCustomService } from './remind.service';
 
-describe('ChatService', () => {
-  let service: CustomChatService;
+describe('RemindCustomService', () => {
+  let service: RemindCustomService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CustomChatService);
+    service = TestBed.inject(RemindCustomService);
   });
 
   it('should be created', () => {

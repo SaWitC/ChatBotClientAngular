@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { LoginCommand } from '../../core/services/swagger-gen/model/loginCommand';
-import { AccountService } from '../../core/services/swagger-gen';
+import { AccountService, Configuration } from '../../core/services/swagger-gen';
+import { HttpClient } from '@angular/common/http';
+import { protocol_botServerDomain } from '../../../../env';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomAccountService extends AccountService {
 
-  //constructor(public AccountService: AccountService) {
-  //  this.AccountService.configuration.basePath = "localhost:7126/";
-  //  this.AccountService.configuration.
-  //}
-  //constructor() { }
-  
+  public override configuration = new Configuration();
 
-    //this.AccountService.configuration.basePath = "localhost:7126";
- // this.configuration.basePath
-    //return this.login(command);
+  constructor(override httpClient: HttpClient, @Optional() configuration: Configuration) {
+    super(httpClient, protocol_botServerDomain, configuration);
+  }
 
 }
