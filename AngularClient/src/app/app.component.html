@@ -1,31 +1,37 @@
 <div class="row">
-  <
   <div class="col-md-4"></div>
 
   <div class="col-md-4">
     <div class="card-custom row">
-      <div class="col-12">
-        <div style="display:flex;" class="">
-          <button routerLink="" (click)="DeactiveOutlet()" class="m-auto btn bg-custom">Login</button>
-          <button routerLink="Register" (click)="ActiveOutlet()" class="m-auto btn bg-custom">Register</button>
-          <button routerLink="MyChats" (click)="ActiveOutlet()" class="m-auto btn bg-custom">MyChats</button>
-          <button routerLink="CreateChat" (click)="ActiveOutlet()" class="m-auto btn bg-custom">CreateChat</button>
+      <div style="height:50px;" class="text-white text-center col row m-0 p-0 w-100">
+        <img src="http://cdn.onlinewebfonts.com/svg/img_216336.png" class="w-25 m-auto" [routerLink]=[routesPath.UserAccount]/>
+
+        
+        <div class="col-12 mt-4">
+          <div style="display:flex;" class="">
+            <button [routerLink]=[routesPath.Login] class=" m-auto btn bg-custom">Login</button>
+            <button [routerLink]=[routesPath.Register]  class="m-auto btn bg-custom">Register</button>
+            <button [routerLink]=[routesPath.MyChats]  class="m-auto btn bg-custom">MyChats</button>
+            <button [routerLink]=[routesPath.CreateChat]  class="m-auto btn bg-custom">CreateChat</button>
+          </div>
         </div>
+
       </div>
+      
+      
+      
 
       <div class="col-12">
         <div>
-
-          <div *ngIf="isActivOutlet;else login">
-            <router-outlet></router-outlet>
+          <div>
+            <router-outlet #outlet></router-outlet>
           </div>
-          <ng-template #login>
-            <app-login (onChanged)="onChanged($event)"></app-login>
-          </ng-template>
+          <!--<ng-template #login>
+            <app-login (onChanged)="onChanged($event)" onRouted="onRouted($event)"></app-login>
+          </ng-template>-->
 
         </div>
       </div>
-
     </div>
   </div>
 

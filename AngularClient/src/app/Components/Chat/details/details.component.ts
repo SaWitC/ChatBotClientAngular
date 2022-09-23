@@ -3,7 +3,7 @@ import * as ChatHubService  from '../../../Services/SignalR/chat/chat.service';
 import { ChatService } from '../../../core/services/swagger-gen/api/chat.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { Subscription, switchMap } from 'rxjs';
+import { Observable, observable, Subscription, switchMap } from 'rxjs';
 import { MessageDto } from '../../../Models/Messages/message-dto.model';
 import { MessageShort } from '../../../Models/Message/MessageShort/message-short.model';
 import { Message} from '../../../Models/Message/message.model';
@@ -19,9 +19,6 @@ import { CustomMessagesService } from '../../../Services/Chat/Message/custom-mes
   styleUrls: ['./details.component.css']
 })
 
-
-  
-
 export class DetailsComponent implements OnInit {
 
 
@@ -33,77 +30,91 @@ export class DetailsComponent implements OnInit {
   
 
   msgText: string;
-  constructor(private chatService: CustomChatService, public chatHubService: ChatHubService.CustomChatService,
+  constructor(
+    private router: Router,
+    private chatService: CustomChatService,
+    public chatHubService: ChatHubService.CustomChatService,
     private activateRoute: ActivatedRoute,
     private messageService: CustomMessagesService,
     public domSanitizer: DomSanitizer  ) {
 
-    //this.subscription = activateRoute.params.subscribe(params => this.id = params['id']);
     setTimeout(() => {
       this.chatHubService.askServerListener();
       this.chatHubService.peopleMessageListener();
-
-      //this.chatService.askServer();
     }, 2000)
   }
 
   ngOnInit(): void {
 
-    
-    //this.correctText = this.domSanitizer.bypassSecurityTrustHtml(this.testtext);
-
     this.chatHubService.startConnection();
     this.id = this.activateRoute.snapshot.params['id'];
 
-    this.chatService.details(this.id).subscribe
+    var subj =this.chatService.details(this.id).subscribe
       (res => {
-        console.log(res)
-        console.log(this.CurentChat)
         this.CurentChat = res as ChatDetails;
-        console.log(this.CurentChat)
+        
       },
-        err => { console.log(err) }
-    );
+      err => { console.log(err) },
+      () => {
+        this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
+        let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
 
-    setTimeout(() => {
-      console.log("1");
-      this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
-      let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
+        this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
 
-      this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
+        this.CurentChat.page = this.CurentChat.page - 1;
+      }
+    )
+  }
 
-      this.CurentChat.page = this.CurentChat.page - 1;
-      console.log(this.CurentChat.page)
-    }, 2000)
+  PageFirsLoad(): void {
+    this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
+    let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
+
+    this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
+
+    this.CurentChat.page = this.CurentChat.page - 1;
   }
 
   send(): void {
-    var message = new Message();
-    message.text = this.msgText;
-    message.isFromBot = false;
+    if (!this.msgText.startsWith("@")) {
+      var message = new Message();
+      message.text = this.msgText;
+      message.isFromBot = false;
 
-    this.chatHubService.MessagesHistory.push(message)
-    console.log(this.chatHubService.MessagesHistory);
-
-    this.chatHubService.askServer(this.msgText, this.id);
+      this.chatHubService.MessagesHistory.push(message)
+      this.chatHubService.askServer(this.msgText, this.id);
+    }
+    else {
+      if (this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)) {
+        var match = this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)
+        let path: string = "";
+        if (match != null)
+          path = this.msgText.replace(match[0], "");
+        this.router.navigate([path.substring(1)])
+      }
+      else if (this.msgText.match(/help\s{0,}/)) {
+        this.router.navigate(["help"])
+      }
+      else {
+        alert("incorrect client command");
+      }
+      
+    }
+   
   }
 
   ReplaceAll(text: string) {
     var res = text.replace(/"/g, '');
-    console.log(res);
     return res;
   }
 
   RenderHtml(obj, text) {
     obj.innerHtml = text;
-    console.log(obj)
   }
 
   LoadOld() {
     this.CurentChat.page = this.CurentChat.page - 1
-    console.log(this.CurentChat.page);
     this.messageService.getMessages(this.CurentChat.page, this.CurentChat.id).subscribe(res => {
-      console.log(res)
       var mess = res as Message[];
       mess = mess.reverse();
 
@@ -111,20 +122,8 @@ export class DetailsComponent implements OnInit {
       this.chatHubService.MessagesHistory = mess.reverse().concat(this.chatHubService.MessagesHistory);
     },
       err =>{
-        console.log(err);
     });
   }
-
-  onChange(e) {
-    console.log(this.date);
-    console.log(e);
-
-    //this.msgText = e;
-    //console.log(e);
-  }
-  //ngOnChanges(changes: SimpleChanges) {
-  //  console.log(changes["date"].currentValue);
-  //}
 
   date: string;
   time: string;
@@ -132,12 +131,10 @@ export class DetailsComponent implements OnInit {
   DateChange(value) {
     this.date = value;
     this.msgText = this.date +" "+ this.time;
-    console.log(value);          //Changed Value
   }
   TimeChange(value) {
     this.time = value;
     this.msgText = this.date + " " + this.time;
-    console.log(value);          //Changed Value
   }
 
   

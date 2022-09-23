@@ -1,6 +1,7 @@
 import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApiModule } from '../../../core/services/swagger-gen';
 import { AccountService } from '../../../core/services/swagger-gen/api/account.service'
@@ -9,6 +10,7 @@ import { LoginModel } from '../../../Models/Account/Login/login-model.model';
 import { Reminds } from '../../../Models/CommandResponseModels/Reminds/reminds.model';
 import { CustomAccountService } from '../../../Services/Account/custom-account.service';
 import { RemindCustomService } from '../../../Services/Commands/Remind/remind.service';
+import { MyChats } from '../../../Services/Routes';
 
 
 @Component({
@@ -18,16 +20,16 @@ import { RemindCustomService } from '../../../Services/Commands/Remind/remind.se
 })
 export class LoginComponent implements OnInit {
 
+  @Output() onRouted = new EventEmitter<boolean>();
   @Output() onChanged = new EventEmitter<boolean>();
 
-  constructor(public apiModeule: ApiModule, public accountService: CustomAccountService, public remindCustomService: RemindCustomService) { }
+  constructor(public apiModeule: ApiModule, public accountService: CustomAccountService, public remindCustomService: RemindCustomService, private router: Router) { }
 
   public Submited: boolean = false;
   ngOnInit(): void {
     this.accountService.configuration.basePath ="localhost:7126/"
   }
   
-
   public login(form: NgForm) {
     this.Submited = true;
     var model: LoginModel;
@@ -37,21 +39,19 @@ export class LoginComponent implements OnInit {
     
     this.accountService.login(model).subscribe(
       res => {
-        console.log(1);
-        console.log(res);
         localStorage.setItem("jwt", res as string)
+
+        alert("you signedin");
+        //this.router.navigate([MyChats]);
       },
       err => {
-        console.log(2);
+        console.log(err);
       }
     );
 
     this.remindCustomService.getActualAndExpiredReminds().subscribe(res => {
-      console.log("1");
-      console.log(res as Reminds[])
       this.remindCustomService.activeReminders = res as Reminds[];
 
-      console.log("reminds done get")
       this.onChanged.emit(true);
       // this.remindCustomService.SetAnyReminds();
     },

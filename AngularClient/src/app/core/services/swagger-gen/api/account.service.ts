@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs';
 import { LoginCommand } from '../model/loginCommand';
 import { RegistrationCommand } from '../model/registrationCommand';
 import { Response } from '../model/response';
+import { UpdatePersonalDataDTO } from '../model/updatePersonalDataDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -58,6 +59,44 @@ export class AccountService {
 
 
     /**
+     * Get personal data
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getPersonalData(observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public getPersonalData(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public getPersonalData(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public getPersonalData(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Response>('get',`${this.basePath}/api/Account/GetPersonalData`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Login in sustem
      * 
      * @param body 
@@ -85,6 +124,7 @@ export class AccountService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -133,6 +173,7 @@ export class AccountService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json-patch+json',
             'application/json',
             'text/json',
             'application/_*+json'
@@ -143,6 +184,55 @@ export class AccountService {
         }
 
         return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Register`,
+            {
+                body: body,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update personal data
+     * 
+     * @param body 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updatePersonalData(body?: UpdatePersonalDataDTO, observe?: 'body', reportProgress?: boolean): Observable<Response>;
+    public updatePersonalData(body?: UpdatePersonalDataDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Response>>;
+    public updatePersonalData(body?: UpdatePersonalDataDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Response>>;
+    public updatePersonalData(body?: UpdatePersonalDataDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'text/plain',
+            'application/json',
+            'text/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json-patch+json',
+            'application/json',
+            'text/json',
+            'application/_*+json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.request<Response>('post',`${this.basePath}/api/Account/Update`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

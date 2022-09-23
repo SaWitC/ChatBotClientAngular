@@ -12,7 +12,7 @@
 
 
 <div *ngFor="let chat of this.CurentPage" class="card mb-3">
-  <a [routerLink]="['ChatDetails',chat.id]">
+  <a [routerLink]="[this.routesPath.ChatDetailsFromMyChats,chat.id]">
     <div class="card-body">
       <div class="d-flex flex-start">
         <img class="rounded-circle shadow-1-strong me-3" src="https://png.pngtree.com/png-vector/20191023/ourlarge/pngtree-vector-moon-icon-png-image_1852023.jpg" alt="avatar" width="40" height="40">

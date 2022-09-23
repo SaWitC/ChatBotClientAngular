@@ -19,16 +19,6 @@ export class CustomChatService extends ChatService {
     super(httpClient, protocol_botServerDomain, configuration);
   }
 
-  //constructor(private http: HttpClient,
-  //  private sanitizer: DomSanitizer
-  //) {
-  //  //this.connection.onclose(async () => {
-  //  //  await this.start();
-  //  //});
-  //  //this.connection.on("Notify", (user, message) => { this.mapReceivedMessage(user, message); });
-  //  //this.start();
-  //}
-
 
   public lastMessageFromBot: SafeHtml;
 
@@ -76,13 +66,11 @@ export class CustomChatService extends ChatService {
       this.MessagesHistory.push(message);
       this.lastMessageFromBot = this.sanitizer.bypassSecurityTrustHtml(message.text);
 
-      console.log(someText);
       return someText;
     })
   }
   peopleMessageListener() {
     this.hubConnection.on("messageFromPeople", (mes) => {
-      console.log(mes);
       return mes;
     })
   }

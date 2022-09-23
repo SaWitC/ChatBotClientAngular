@@ -1,0 +1,56 @@
+
+<div class="text-white">
+  <div class="row">
+    <div class="col"><hr class="solid-white"></div>
+    <div class="col-auto"><h2>Personal data</h2></div>
+    <div class="col"><hr class="solid-white"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-4"><h4>Email</h4></div>
+    <div class="col-8"> <p>{{this.customAccountService.CurentUser.email}}</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col-4"><h4>User name:</h4></div>
+    <div class="col-8"> <p>{{this.customAccountService.CurentUser.userName}}</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col-4"><h4>Phone number:</h4></div>
+    <div class="col-8"> <p>{{this.customAccountService.CurentUser.phoneNumber}}</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><hr class="solid-white"></div>
+    <div class="col-auto"><h2>Vk data</h2></div>
+    <div class="col"><hr class="solid-white"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-4"><h4>VK Email:</h4></div>
+    <div class="col-8"> <p>{{this.customAccountService.CurentUser.vkEmail}}</p></div>
+  </div>
+  <hr class="text-white" />
+
+  <div class="row">
+    <div class="col-4"><h4>Vk connectionv</h4></div>
+    <div class="col-4"> <p>wee</p></div>
+    <div class="col-4"><h4 class="link-primary"><a [routerLink]="[this.routesPath.ConectToVk]" >Conect</a></h4></div>
+
+  </div>
+  <hr class="text-white" />
+
+  <div class="row">
+    <div class="col-4"><h4>send reminder to vk:</h4></div>
+    <div class="col-4"><input type="checkbox" class="form-check-input" name="sendToVk" [(ngModel)]="this.customAccountService.CurentUser.sendToVk" /></div>
+    <div class="col-4"><button (click)="SaveSendStatus()">Save</button></div>
+
+  </div>
+  <!--<button onclick="">save changes</button>-->
+
+</div>
+
+
+
+

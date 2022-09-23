@@ -26,26 +26,19 @@ export class RemindCustomService extends RemindService  {
 
     //let testdd = new Date(2022, 09, 17, 20, 14);
     //console.log(testdd.getTime())
-    let a =0;
+    let i =0;
 
     for (let remind of this.activeReminders) {
+      i++;
       var res = remind.remindAtTime.match(/[0-9]{1,4}/g);
 
       var curentDate = new Date();
-      a++;
-
       var curent = curentDate.toISOString().match(/[0-9]{1,4}/g);
-      console.log("1r");
-      console.log(res);
-      console.log(curent);
-
-      //console.log(res.);
 
       if (res != null && curent != null) {
 
         var date = new Date(parseInt(res[0]), parseInt(res[1]), parseInt(res[2]), parseInt(res[3]), parseInt(res[4]))
         var curentDate = new Date(parseInt(curent[0]), parseInt(curent[1]), parseInt(curent[2]), curentDate.getHours(), parseInt(curent[4]))
-
 
         var minbetwen = (date.getTime() - curentDate.getTime());
 
@@ -58,12 +51,11 @@ export class RemindCustomService extends RemindService  {
           setTimeout(() => {
             alert("remind" + remind.remindMessage);
             this.removeReminder(remind.id).subscribe(res => {
-              console.log(remind.remindMessage +"deleted")
             },
               err => console.log("remove error")
             );
 
-          },1000*a)
+          },1000*i)
         }
         else {
           setTimeout(() => {
@@ -71,10 +63,41 @@ export class RemindCustomService extends RemindService  {
             
           }, diffMins * 60000)
         }
-        console.log("3r");
       }
     }
     this.activeReminders = [];
-   
+  }
+
+
+
+  IsMessageCorrectReminder(message: string) {
+    var res = message.match("saved remind")
+    if (res)
+      return true;
+    return false;
+  }
+
+  SetTimeoutToReminder(remind: Reminds) {
+
+    let currentDateArr = new Date().toISOString().match(/[0-9]{1,4}/g);;
+    var dateArr = remind.remindMessage.match(/[0-9]{1,4}/g)
+    if (dateArr != null && currentDateArr != null) {
+      var date = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]), parseInt(dateArr[3]), parseInt(dateArr[4]));
+      var curentDate = new Date(parseInt(dateArr[0]), parseInt(dateArr[1]), parseInt(dateArr[2]), new Date().getHours(), parseInt(dateArr[4]));
+
+      var minbetwen = (date.getTime() - curentDate.getTime());
+
+      var diffMins = Math.round(((minbetwen % 86400000) % 3600000) / 60000)
+
+      if (date.getTime() < curentDate.getTime() + (1 * 60 * 60 * 1000) && date.getTime() > curentDate.getTime()) {
+        setTimeout(() => {
+          alert("remind" + remind.remindMessage);
+          this.removeReminder(remind.id).subscribe(res => {
+          },
+            err => console.log("remove error")
+          );
+        });
+      }
+    }
   }
 }

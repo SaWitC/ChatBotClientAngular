@@ -1,0 +1,13 @@
+hr.dotted {
+  border-top: 2px dotted #999;
+}
+
+hr.dashed {
+  border-top: 2px dashed #999;
+}
+
+hr.solid-white {
+  border-top: 4px solid #ffffff;
+  background-color:aliceblue;
+  color:aliceblue;
+}

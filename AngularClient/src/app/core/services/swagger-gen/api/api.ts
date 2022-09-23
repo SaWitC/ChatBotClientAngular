@@ -8,4 +8,6 @@ export * from './remind.service';
 import { RemindService } from './remind.service';
 export * from './signalR.service';
 import { SignalRService } from './signalR.service';
-export const APIS = [AccountService, ChatService, MessageService, RemindService, SignalRService];
+export * from './vk.service';
+import { VkService } from './vk.service';
+export const APIS = [AccountService, ChatService, MessageService, RemindService, SignalRService, VkService];

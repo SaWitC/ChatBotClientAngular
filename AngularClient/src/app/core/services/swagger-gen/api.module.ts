@@ -8,6 +8,7 @@ import { ChatService } from './api/chat.service';
 import { MessageService } from './api/message.service';
 import { RemindService } from './api/remind.service';
 import { SignalRService } from './api/signalR.service';
+import { VkService } from './api/vk.service';
 
 @NgModule({
   imports:      [],
@@ -18,7 +19,8 @@ import { SignalRService } from './api/signalR.service';
     ChatService,
     MessageService,
     RemindService,
-    SignalRService ]
+    SignalRService,
+    VkService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {
