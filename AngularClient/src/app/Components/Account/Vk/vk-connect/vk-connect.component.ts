@@ -28,7 +28,7 @@ export class VkConnectComponent implements OnInit {
 
     this.vkService.tryConectToVk(this.email, this.password).subscribe(
       res => {
-        console.log(res)
+        //console.log(res)
       },
       err => {
         console.log(err);

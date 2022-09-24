@@ -25,6 +25,7 @@ import { VkConnectComponent } from './Components/Account/Vk/vk-connect/vk-connec
 import { CreateComponent } from './Components/Chat/create/create.component';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { DetailsComponent } from './Components/Chat/details/details.component';
+import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -45,6 +46,8 @@ export function tokenGetter() {
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
+    MatButtonModule,
+
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -60,7 +63,7 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule,
   ],
-  providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, RouteService],
+  providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, NotifySignalRService, RouteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

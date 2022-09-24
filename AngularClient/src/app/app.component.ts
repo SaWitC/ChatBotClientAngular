@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { RemindCustomService } from './Services/Commands/Remind/remind.service';
 import * as RoutesPath from './Services/Routes';
 import { RouteService } from './Services/RouteService/route.service';
+import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,19 @@ export class AppComponent implements OnInit {
   //public isActivOutlet: boolean = false;
   public routesPath = RoutesPath;
 
-  constructor(public remindCustomService: RemindCustomService, public router: Router,public routeService: RouteService) {
+  constructor(public remindCustomService: RemindCustomService, public router: Router, public routeService: RouteService, public HotifySignlaR: NotifySignalRService) {
     //this.router.events.subscribe(res => {
     //  if (this.router.url == "/")
     //    //this.isActivOutlet = false;
     //})
   }
   ngOnInit() {
-    
+
+    setTimeout(() => {
+      this.HotifySignlaR.NotifyMessageListener();
+    }, 2000)
+
+    this.HotifySignlaR.startConnection();
   }
 
   onChanged(increased: any) {

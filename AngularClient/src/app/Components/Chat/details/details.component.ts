@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import * as ChatHubService  from '../../../Services/SignalR/chat/chat.service';
 import { ChatService } from '../../../core/services/swagger-gen/api/chat.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -19,7 +19,7 @@ import { CustomMessagesService } from '../../../Services/Chat/Message/custom-mes
   styleUrls: ['./details.component.css']
 })
 
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, OnDestroy {
 
 
   id: string;
@@ -43,6 +43,10 @@ export class DetailsComponent implements OnInit {
       this.chatHubService.peopleMessageListener();
     }, 2000)
   }
+  ngOnDestroy(): void {
+   //this.chatHubService.
+    //console.log("destroued");
+    }
 
   ngOnInit(): void {
 

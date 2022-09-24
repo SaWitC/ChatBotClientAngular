@@ -5,13 +5,12 @@
     "\\src\\app",
     "\\src\\app\\Components",
     "\\src\\app\\Components\\Account",
-    "\\src\\app\\Components\\Account\\user-account",
-    "\\src\\app\\core",
-    "\\src\\app\\core\\services",
-    "\\src\\app\\core\\services\\swagger-gen",
-    "\\src\\app\\core\\services\\swagger-gen\\api",
-    "\\src\\app\\core\\services\\swagger-templates"
+    "\\src\\app\\Components\\Account\\Vk",
+    "\\src\\app\\Components\\Account\\Vk\\vk-connect",
+    "\\src\\app\\Services",
+    "\\src\\app\\Services\\SignalR\\chat",
+    "\\src\\app\\Services\\SignalR\\Notify"
   ],
-  "SelectedNode": "\\src\\app\\Models\\Account\\User\\Update\\update-data.model.ts",
+  "SelectedNode": "\\src\\app\\Components\\Account\\Vk\\vk-connect\\vk-connect.component.html",
   "PreviewInSolutionExplorer": false
 }

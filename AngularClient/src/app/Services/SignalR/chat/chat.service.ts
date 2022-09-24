@@ -27,12 +27,17 @@ export class CustomChatService extends ChatService {
   hubConnection: signalR.HubConnection;
 
   startConnection = () => {
-
+    try {
+      this.hubConnection.stop();
+    }
+    catch {
+      console.log("Connection is stoped")
+    }
     var token = ""
     token+=localStorage.getItem("jwt");
     if (token != null) {
       this.hubConnection = new signalR.HubConnectionBuilder()
-        .withUrl('https://localhost:7126/toastr', {
+        .withUrl(protocol_botServerDomain +'/toastr', {
           skipNegotiation: true,
           accessTokenFactory: function () {
             return token;
