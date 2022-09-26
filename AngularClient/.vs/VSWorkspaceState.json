@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Account",
-    "\\src\\app\\Components\\Account\\Vk",
-    "\\src\\app\\Components\\Account\\Vk\\vk-connect",
+    "\\src\\app\\Components\\Chat",
+    "\\src\\app\\Components\\Chat\\details",
     "\\src\\app\\Services",
-    "\\src\\app\\Services\\SignalR\\chat",
-    "\\src\\app\\Services\\SignalR\\Notify"
+    "\\src\\app\\Services\\Account",
+    "\\src\\app\\Services\\SignalR",
+    "\\src\\app\\Services\\SignalR\\chat"
   ],
-  "SelectedNode": "\\src\\app\\Components\\Account\\Vk\\vk-connect\\vk-connect.component.html",
+  "SelectedNode": "\\src\\app\\Components\\Chat\\details\\details.component.ts",
   "PreviewInSolutionExplorer": false
 }

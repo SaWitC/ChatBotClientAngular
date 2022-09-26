@@ -6,8 +6,9 @@
     
 
     <button (click)="LoadOld()">load old</button>
+    <button (click)="cll()">111111111111</button>
     <div class="text-white">
-      <div style="overflow-x:hidden; height:60vh">
+      <div id="chatdiv" (scroll)="onScroll($event)" style="overflow-x:hidden; height:60vh">
 
         <div *ngFor="let message of this.chatHubService.MessagesHistory;let last =last">
 

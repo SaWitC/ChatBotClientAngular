@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import * as ChatHubService  from '../../../Services/SignalR/chat/chat.service';
 import { ChatService } from '../../../core/services/swagger-gen/api/chat.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -19,17 +19,8 @@ import { CustomMessagesService } from '../../../Services/Chat/Message/custom-mes
   styleUrls: ['./details.component.css']
 })
 
-export class DetailsComponent implements OnInit, OnDestroy {
 
-
-  id: string;
-  private subscription: Subscription;
-  public CurentChat: ChatDetails = new ChatDetails();
-
-  public lastDatepicker: HTMLInputElement;
-  
-
-  msgText: string;
+export class DetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private chatService: CustomChatService,
@@ -43,10 +34,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.chatHubService.peopleMessageListener();
     }, 2000)
   }
-  ngOnDestroy(): void {
-   //this.chatHubService.
-    //console.log("destroued");
-    }
+  
 
   ngOnInit(): void {
 
@@ -59,16 +47,49 @@ export class DetailsComponent implements OnInit, OnDestroy {
         
       },
       err => { console.log(err) },
-      () => {
+        () => {
+          this.chatdiv = document.getElementById("chatdiv");
+
         this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
         let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
 
         this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
 
         this.CurentChat.page = this.CurentChat.page - 1;
+
+
       }
     )
   }
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+    if (this.chatdiv != null) {
+      //console.log(event)
+      if (this.chatdiv.clientHeight + this.chatdiv.scrollTop + 1 > this.chatdiv.scrollHeight) {
+        this.scrolToTheEnd = true;
+      }
+      else if (this.chatdiv.scrollTop == 0) {
+        console.log("222");
+        this.scrolToTheEnd = false;
+        this.chatdiv.scrollTop = 1;
+        this.LoadOld();
+      }
+      else {
+        this.scrolToTheEnd = false;
+      }
+    }
+  }
+
+  id: string;
+  private scrolToTheEnd = false;
+
+  public CurentChat: ChatDetails = new ChatDetails();
+  public chatdiv: HTMLElement | null;
+
+
+  msgText: string;
+
 
   PageFirsLoad(): void {
     this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
@@ -104,6 +125,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
       }
       
     }
+    setTimeout(() => {
+      if (this.scrolToTheEnd && this.chatdiv!=null) {    
+        this.chatdiv.scrollTop = this.chatdiv.scrollHeight;
+      }
+    }, 500)
    
   }
 
@@ -117,6 +143,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   LoadOld() {
+
     this.CurentChat.page = this.CurentChat.page - 1
     this.messageService.getMessages(this.CurentChat.page, this.CurentChat.id).subscribe(res => {
       var mess = res as Message[];
@@ -139,6 +166,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   TimeChange(value) {
     this.time = value;
     this.msgText = this.date + " " + this.time;
+  }
+  cll() {
+    if (this.chatdiv != null) {
+      //this.chatdiv.scrollHeight;
+      console.log(this.chatdiv.offsetHeight)
+    }
   }
 
   

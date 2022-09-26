@@ -62,8 +62,6 @@ export class CustomChatService extends ChatService {
 
   askServerListener() {
     this.hubConnection.on("askServerResponse", (someText) => {
-
-      //var message = new MessageShort();
       var message = new Message();
 
       message.text = someText;
