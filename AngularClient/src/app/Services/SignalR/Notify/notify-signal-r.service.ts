@@ -17,6 +17,15 @@ export class NotifySignalRService {
 
   hubConnection: signalR.HubConnection;
 
+  stopConnection() {
+    try {
+      this.hubConnection.stop();
+    }
+    catch {
+
+    }
+  }
+
   startConnection = () => {
 
     try {
@@ -25,6 +34,7 @@ export class NotifySignalRService {
     catch {
       console.log("Connection is stoped")
     }
+    
 
     var token = ""
     token += localStorage.getItem("jwt");

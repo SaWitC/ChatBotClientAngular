@@ -42,6 +42,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("jwt", res as string)
 
         alert("you signedin");
+        location.reload();
+        
         //this.router.navigate([MyChats]);
       },
       err => {

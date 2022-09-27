@@ -26,6 +26,15 @@ export class CustomChatService extends ChatService {
 
   hubConnection: signalR.HubConnection;
 
+  closeConnection() {
+    try {
+      this.hubConnection.stop();
+    }
+    catch {
+
+    }
+  }
+
   startConnection = () => {
     try {
       this.hubConnection.stop();
