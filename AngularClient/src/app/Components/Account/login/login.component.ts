@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.configuration.basePath ="localhost:7126/"
   }
+
+  public ErrorMessage: string = "";
   
   public login(form: NgForm) {
     this.Submited = true;
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
         //this.router.navigate([MyChats]);
       },
       err => {
-        console.log(err);
+        this.ErrorMessage = "Сервер не отвечает";
       }
     );
 

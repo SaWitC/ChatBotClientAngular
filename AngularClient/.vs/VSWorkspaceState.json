@@ -4,13 +4,11 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
+    "\\src\\app\\Components\\Account",
+    "\\src\\app\\Components\\Account\\login",
     "\\src\\app\\Components\\Chat",
-    "\\src\\app\\Guards",
-    "\\src\\app\\Guards\\Auth",
-    "\\src\\app\\Guards\\Auth\\AuthGard",
-    "\\src\\app\\Services\\SignalR",
-    "\\src\\app\\Services\\SignalR\\Notify"
+    "\\src\\app\\Components\\Chat\\create"
   ],
-  "SelectedNode": "\\src\\app\\Guards\\Auth\\AuthGard\\auth-guard.service.ts",
+  "SelectedNode": "\\src\\app\\Components\\Chat\\create\\create.component.html",
   "PreviewInSolutionExplorer": false
 }

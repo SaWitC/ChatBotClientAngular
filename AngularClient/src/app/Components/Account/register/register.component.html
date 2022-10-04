@@ -3,9 +3,10 @@
   <form [formGroup]="registerGroup" (ngSubmit)="Submit()">
 
     <div class="form-group">
-      <label>User Name</label>
-      <input class="form-control" formControlName="UserName" name="UserName" placeholder="User Name" required />
-
+      <mat-form-field class="w-100">
+        <mat-label class="text-white">UserName</mat-label>
+        <input matInput formControlName="UserName" name="UserName" placeholder="User Name" required />
+      </mat-form-field>
       <span class="text-danger"
             *ngIf="(registerFormControls['UserName'].touched || submitted) && registerFormControls['UserName'].errors?.['required']">
         <br>UserName is required
@@ -17,8 +18,11 @@
     </div>
 
     <div class="form-group">
-      <label>Email</label>
-      <input formControlName="Email" name="Email" placeholder="Email" class="form-control" required />
+      <mat-form-field class="w-100">
+        <mat-label class="text-white">Email</mat-label>
+        <input matInput formControlName="Email" name="Email" placeholder="User Name" required />
+      </mat-form-field>
+
       <span class="text-danger"
             *ngIf="(registerFormControls['Email'].touched || submitted) && registerFormControls['Email'].errors?.['required']">
         <br>Email is required
@@ -30,8 +34,12 @@
     </div>
 
     <div class="form-group">
-      <label>Password</label>
-      <input formControlName="Password" name="Password" placeholder="Password" class="form-control" required />
+      <mat-form-field class="w-100">
+        <mat-label class="text-white">Password</mat-label>
+        <input matInput formControlName="Password" name="Password" placeholder="User Name" required />
+
+      </mat-form-field>
+
       <span class="text-danger"
             *ngIf="(registerFormControls['Password'].touched || submitted) && registerFormControls['Password'].errors?.['required']">
         <br>Password is required
@@ -47,8 +55,12 @@
     </div>
 
     <div class="form-group">
-      <label>Confirm Password</label>
-      <input formControlName="ConfirmPass" name="ConfirmPass" placeholder="Confirm Password" class="form-control" required />
+      <mat-form-field class="w-100">
+        <mat-label class="text-white">ConfirmPass</mat-label>
+        <input matInput formControlName="ConfirmPass" name="ConfirmPass" placeholder="User Name" required />
+
+      </mat-form-field>
+
       <span class="text-danger"
             *ngIf="(registerFormControls['ConfirmPass'].touched || submitted) && registerFormControls['ConfirmPass'].errors?.['required']">
         <br>Confirm Password is required
@@ -59,8 +71,86 @@
       </span>
     </div>
 
+
+    <!--<div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label class="text-white">Password</mat-label>
+      <input class="w-100" name="password" ngModel #password="ngModel" required matInput placeholder="Password">
+      <mat-hint *ngIf="Submited || userName.invalid && userName.touched" class="text-danger">UserName is required</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label class="text-white">Password</mat-label>
+      <input class="w-100" name="password" ngModel #password="ngModel" required matInput placeholder="Password">
+      <mat-hint *ngIf="Submited || userName.invalid && userName.touched" class="text-danger">UserName is required</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="form-group">
+    <mat-form-field class="w-100">
+      <mat-label class="text-white">Password</mat-label>
+      <input class="w-100" name="password" ngModel #password="ngModel" required matInput placeholder="Password">
+      <mat-hint *ngIf="Submited || userName.invalid && userName.touched" class="text-danger">UserName is required</mat-hint>
+    </mat-form-field>
+  </div>-->
+    <!--<div class="form-group">
+    <label>User Name</label>
+    <input class="form-control" formControlName="UserName" name="UserName" placeholder="User Name" required />
+
+    <span class="text-danger"
+          *ngIf="(registerFormControls['UserName'].touched || submitted) && registerFormControls['UserName'].errors?.['required']">
+      <br>UserName is required
+    </span>
+    <span class="text-danger"
+          *ngIf="registerFormControls['UserName'].touched && registerFormControls['UserName'].invalid">
+      <br>Incorrect User Name
+    </span>
+  </div>-->
+    <!--<div class="form-group">
+    <label>Email</label>
+    <input formControlName="Email" name="Email" placeholder="Email" class="form-control" required />
+    <span class="text-danger"
+          *ngIf="(registerFormControls['Email'].touched || submitted) && registerFormControls['Email'].errors?.['required']">
+      <br>Email is required
+    </span>
+    <span class="text-danger"
+          *ngIf="registerFormControls['Email'].touched && registerFormControls['Email'].invalid">
+      <br>Incorrect Email
+    </span>
+  </div>-->
+    <!--<div class="form-group">
+    <label>Password</label>
+    <input formControlName="Password" name="Password" placeholder="Password" class="form-control" required />
+    <span class="text-danger"
+          *ngIf="(registerFormControls['Password'].touched || submitted) && registerFormControls['Password'].errors?.['required']">
+      <br>Password is required
+    </span>
+    <span class="text-danger"
+          *ngIf="registerFormControls['Password'].touched && registerFormControls['Password'].invalid">
+      <br>password required must have minimum 6 symbols
+      <br>password sould have minimum one symbol
+      <br>password sould have minimum one number
+      <br>password sould have minimum one upper case leter
+      <br>password sould have minimum one lower case leter
+    </span>
+  </div>-->
+    <!--<div class="form-group">
+      <label>Confirm Password</label>
+      <input formControlName="ConfirmPass" name="ConfirmPass" placeholder="Confirm Password" class="form-control" required />
+      <span class="text-danger"
+            *ngIf="(registerFormControls['ConfirmPass'].touched || submitted) && registerFormControls['ConfirmPass'].errors?.['required']">
+        <br>Confirm Password is required
+      </span>
+      <span class="text-danger"
+            *ngIf="registerFormControls['ConfirmPass'].touched && registerFormControls['ConfirmPass'].invalid">
+        the confirmation password must be equal to the password
+      </span>
+    </div>-->
+
     <div class="text-center">
-      <button class="btn text-white border mt-2" type="submit">submit</button>
+      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit">submit</button>
+      <!--<button class="btn text-white border mt-2" type="submit">submit</button>-->
     </div>
   </form>
 </div>

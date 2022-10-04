@@ -167,15 +167,6 @@ export class DetailsComponent implements OnInit {
     this.time = value;
     this.msgText = this.date + " " + this.time;
   }
-  cll() {
-    if (this.chatdiv != null) {
-      //this.chatdiv.scrollHeight;
-      console.log(this.chatdiv.offsetHeight)
-    }
-  }
-
-  
-
 }
 
 

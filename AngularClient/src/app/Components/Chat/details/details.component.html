@@ -2,11 +2,8 @@
   <div class="col-3 bg-info "></div>
 
   <div class="col-6 bg-dark text-white">-->
-    <h3 class="text-center text-white">Messages</h3>
-    
-
-    <button (click)="LoadOld()">load old</button>
-    <button (click)="cll()">111111111111</button>
+    <!--<button class="w-100 bg-info btn mt-5" (click)="LoadOld()">load old</button>-->
+<button class=" m-auto mt-5 w-100 btn bg-custom text-dark" color="primary" mat-flat-button (click)="LoadOld()" type="submit">loadOld</button>
     <div class="text-white">
       <div id="chatdiv" (scroll)="onScroll($event)" style="overflow-x:hidden; height:60vh">
 
@@ -64,7 +61,9 @@
               <input [(ngModel)]="msgText" name="msgText" class="form-control" />
             </div>
             <div class="col-2">
-              <button class="btn bg-info">send</button>
+
+              <button class=" m-auto btn bg-custom text-dark" color="primary" mat-flat-button type="submit">send</button>
+              <!--<button class="btn bg-info">send</button>-->
             </div>
           </div>
         </form>

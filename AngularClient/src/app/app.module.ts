@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+
 import { RegisterComponent } from './Components/Account/register/register.component';
 import { RemindCustomService } from './Services/Commands/Remind/remind.service';
 import { CustomChatService } from './Services/Chat/Chat/custom-chat.service';
@@ -46,8 +48,8 @@ export function tokenGetter() {
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule,
-
+    MatButtonModule,   
+    MatInputModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,

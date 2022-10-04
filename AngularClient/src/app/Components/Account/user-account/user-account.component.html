@@ -44,7 +44,10 @@
   <div class="row">
     <div class="col-4"><h4>send reminder to vk:</h4></div>
     <div class="col-4"><input type="checkbox" class="form-check-input" name="sendToVk" [(ngModel)]="this.customAccountService.CurentUser.sendToVk" /></div>
-    <div class="col-4"><button (click)="SaveSendStatus()">Save</button></div>
+    <div class="col-4">
+      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit" (click)="SaveSendStatus()">save</button>
+      <!--<button (click)="SaveSendStatus()">Save</button>-->
+    </div>
 
   </div>
   <!--<button onclick="">save changes</button>-->

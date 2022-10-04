@@ -2,11 +2,18 @@
 <div class="row">
   <div class="col-12 text-center">
     <form #form="ngForm" (ngSubmit)="submit(form)">
-      <input class="form-control" required ngModel #title="ngModel" name="title" />
-      <span *ngIf="title.touched && title.invalid" class="text-danger">
-        title is Required
-      </span>
-      <button type="submit" class="btn btn-warning">Create</button>
+    
+      <div class="form-group">
+        <mat-form-field class="w-100">
+          <mat-label class="text-white">Chat Title</mat-label>
+          <input matInput required ngModel #title="ngModel" name="title" />
+        </mat-form-field>
+        <span *ngIf="(title.touched || this.isSubmitted) && title.invalid" class="text-danger">
+          title is Required
+        </span>
+      </div>
+      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit">submit</button>
+      <!-- <button type="submit" class="btn btn-warning">Create</button>-->
     </form>
   </div>
 </div>

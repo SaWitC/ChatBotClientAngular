@@ -13,12 +13,13 @@ export class CreateComponent implements OnInit {
 
   constructor(public chatService: CustomChatService) { }
 
+  public isSubmitted: boolean = false;
+
   ngOnInit(): void {
   }
 
-
   submit(form: NgForm) {
-
+    this.isSubmitted = true;
     console.log(form.value.title);
     this.chatService.createChat({ title: form.value.title }).subscribe(
       res => {
