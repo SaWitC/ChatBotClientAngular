@@ -1,0 +1,28 @@
+<!--<div>
+  <form class="w-100" (submit)="submit()">
+    <label>Select File</label>
+    <input type="file"/>
+    <button>Send</button>
+  </form>
+</div>-->
+
+
+
+<div>
+  <div class="file-upload">
+
+    {{fileName || "No file uploaded yet."}}
+    <input type="file" class="form-control"
+           [accept]="requiredFileType"
+           (change)="onFileSelected($event)" #fileUpload>
+  </div>
+  <div *ngIf="uploadProgress">
+    <h3>progress</h3>
+    <h3 class="text-white" *ngIf="uploadProgress">
+      {{uploadProgress}}
+    </h3>
+    <div class="cancel-upload" (click)="cancelUpload()"
+         *ngIf="uploadProgress">delete_forever</div>
+  </div>
+</div>
+

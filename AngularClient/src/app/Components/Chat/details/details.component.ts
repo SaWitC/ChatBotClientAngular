@@ -12,6 +12,7 @@ import { MessageService } from '../../../core/services/swagger-gen';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
 import { CustomMessagesService } from '../../../Services/Chat/Message/custom-messages.service';
+import { CommandsService } from '../../../Services/Chat/commands.service';
 
 @Component({
   selector: 'app-details',
@@ -27,7 +28,8 @@ export class DetailsComponent implements OnInit {
     public chatHubService: ChatHubService.CustomChatService,
     private activateRoute: ActivatedRoute,
     private messageService: CustomMessagesService,
-    public domSanitizer: DomSanitizer  ) {
+    public domSanitizer: DomSanitizer,
+    public TypicalCommands: CommandsService) {
 
     setTimeout(() => {
       this.chatHubService.askServerListener();
@@ -101,6 +103,7 @@ export class DetailsComponent implements OnInit {
   }
 
   send(): void {
+    this.TypicalCommands.deactivateAll();//all commands will get the status false.
     if (!this.msgText.startsWith("@")) {
       var message = new Message();
       message.text = this.msgText;
@@ -108,8 +111,10 @@ export class DetailsComponent implements OnInit {
 
       this.chatHubService.MessagesHistory.push(message)
       this.chatHubService.askServer(this.msgText, this.id);
+
     }
     else {
+
       if (this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)) {
         var match = this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)
         let path: string = "";
@@ -119,6 +124,9 @@ export class DetailsComponent implements OnInit {
       }
       else if (this.msgText.match(/help\s{0,}/)) {
         this.router.navigate(["help"])
+      }
+      else if (this.msgText.match(/file\s{0,}/)) {
+        this.TypicalCommands.IsLastCommandSendFile = true;//last command sendFile
       }
       else {
         alert("incorrect client command");

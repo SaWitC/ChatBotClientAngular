@@ -18,16 +18,18 @@ import { MatInputModule } from '@angular/material/input';
 import { RegisterComponent } from './Components/Account/register/register.component';
 import { RemindCustomService } from './Services/Commands/Remind/remind.service';
 import { CustomChatService } from './Services/Chat/Chat/custom-chat.service';
-import { botServerDomain } from '../../env';
+import { botServerDomain, FileServerDomain } from '../../env';
 import { CustomMessagesService } from './Services/Chat/Message/custom-messages.service';
 import { InfoComponent } from './Components/Info/info/info.component';
-import { RouteService } from './Services/RouteService/route.service';
 import { UserAccountComponent } from './Components/Account/user-account/user-account.component';
 import { VkConnectComponent } from './Components/Account/Vk/vk-connect/vk-connect.component';
 import { CreateComponent } from './Components/Chat/create/create.component';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { DetailsComponent } from './Components/Chat/details/details.component';
 import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
+import { MyFilesComponent } from './Components/File/my-files/my-files.component';
+import { FileFormComponent } from './Components/File/file-form/file-form.component';
+import { FileComponent } from './Components/File/file/file.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -43,12 +45,16 @@ export function tokenGetter() {
     RegisterComponent,
     InfoComponent,
     UserAccountComponent,
-    VkConnectComponent
+    VkConnectComponent,
+    MyFilesComponent,
+    FileFormComponent,
+    FileComponent
   ],
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule,   
+    MatButtonModule,
+    
     MatInputModule,
     ReactiveFormsModule,
     BrowserModule,
@@ -59,13 +65,13 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: [botServerDomain],
+        allowedDomains: [botServerDomain, FileServerDomain],
         disallowedRoutes:[],
       }
     }),
     BrowserAnimationsModule,
   ],
-  providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, NotifySignalRService, RouteService],
+  providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, NotifySignalRService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

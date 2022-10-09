@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -30,7 +31,8 @@ export class LoginComponent implements OnInit {
     this.accountService.configuration.basePath ="localhost:7126/"
   }
 
-  public ErrorMessage: string = "";
+  public errorMessage: string = "";
+  public isRequestCompletedIncorrect: boolean = false;
   
   public login(form: NgForm) {
     this.Submited = true;
@@ -43,13 +45,18 @@ export class LoginComponent implements OnInit {
       res => {
         localStorage.setItem("jwt", res as string)
 
-        alert("you signedin");
-        location.reload();
-        
-        //this.router.navigate([MyChats]);
+          alert("you signedin");
+          location.reload();
+
+ 
       },
       err => {
-        this.ErrorMessage = "Сервер не отвечает";
+        console.log(err);
+        this.errorMessage = "Сервер не отвечает";
+        this.isRequestCompletedIncorrect = true;
+      },
+      () => {
+        
       }
     );
 

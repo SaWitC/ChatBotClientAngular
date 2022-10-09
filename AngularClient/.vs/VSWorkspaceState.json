@@ -4,11 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Account",
-    "\\src\\app\\Components\\Account\\login",
     "\\src\\app\\Components\\Chat",
-    "\\src\\app\\Components\\Chat\\create"
+    "\\src\\app\\Components\\Chat\\details",
+    "\\src\\app\\Components\\File",
+    "\\src\\app\\Components\\File\\file-form",
+    "\\src\\app\\Models",
+    "\\src\\app\\Models\\File"
   ],
-  "SelectedNode": "\\src\\app\\Components\\Chat\\create\\create.component.html",
+  "SelectedNode": "\\src\\app\\Components\\File\\file-form\\file-form.component.html",
   "PreviewInSolutionExplorer": false
 }

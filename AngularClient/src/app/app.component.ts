@@ -4,7 +4,6 @@ import { AccountService } from './core/services/swagger-gen';
 import { CustomAccountService } from './Services/Account/custom-account.service';
 import { RemindCustomService } from './Services/Commands/Remind/remind.service';
 import * as RoutesPath from './Services/Routes';
-import { RouteService } from './Services/RouteService/route.service';
 import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
 
 @Component({
@@ -21,7 +20,6 @@ export class AppComponent implements OnInit {
   constructor(public accountService: CustomAccountService,
     public remindCustomService: RemindCustomService,
     public router: Router,
-    public routeService: RouteService,
     public HotifySignlaR: NotifySignalRService) {
   }
   ngOnInit() {

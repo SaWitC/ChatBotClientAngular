@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RouteService } from './route.service';
+import { CustomFileService } from './custom-file.service';
 
-describe('RouteService', () => {
-  let service: RouteService;
+describe('CustomFileService', () => {
+  let service: CustomFileService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RouteService);
+    service = TestBed.inject(CustomFileService);
   });
 
   it('should be created', () => {
