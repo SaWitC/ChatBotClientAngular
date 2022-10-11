@@ -1,11 +1,11 @@
 <div>
 
-  <div *ngFor="let file of this.files">
+  <div *ngFor="let file of this.fileService.files">
     <hr />
     <div>
       <label class="wrap">{{file.fileTitle}}</label>
       <button (click)="load(file.fileTitle,file.fileType)" class="btn bg-info m-1">open</button>
-      <button (click)="load(file.fileTitle,file.fileType)" class="btn bg-danger m-1">Remove</button>
+      <button (click)="Remove(file.fileTitle)" class="btn bg-danger m-1">Remove</button>
     </div>
   </div>
 </div>

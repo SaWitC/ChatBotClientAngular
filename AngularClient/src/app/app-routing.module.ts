@@ -19,7 +19,7 @@ const routes: Routes = [/*{ component: LoginComponent, path: "Login" },*/
   { component: DetailsComponent, path: ChatDetailsFullpath, canActivate: [AuthGuardService] },
   { component: LoginComponent, path: Login, },
   { component: RegisterComponent, path: Register },
-  { component: UserAccountComponent, path: UserAccount, canActivate: [AuthGuardService] },
+  { /*component: UserAccountComponent,*/loadChildren: () => import('../app/Components/Account/user-account/user-account.module').then(m => m.UserAccountModule), path: UserAccount, canActivate: [AuthGuardService] },
   { component: VkConnectComponent, path: ConectToVkFullPath, canActivate: [AuthGuardService] }];
 
 @NgModule({

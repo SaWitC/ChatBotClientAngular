@@ -13,17 +13,20 @@ export class MyFilesComponent implements OnInit {
 
   constructor(public fileService: CustomFileService, public http: HttpClient) { }
 
-  public files: FileModel[];
+  //public files: FileModel[];
 
-  public file: FileModel;
+  //public file: FileModel;
 
   ngOnInit(): void {
-    this.fileService.getAllFiles().subscribe(res => {
-      this.files = res as FileModel[];
-      console.log(res);
-      console.log(res as FileModel[])
-    });
+    this.fileService.loadAll();
   }
+  //private loadAll() {
+  //  this.fileService.getAllFiles().subscribe(res => {
+  //    this.files = res as FileModel[];
+  //    console.log(res);
+  //    console.log(res as FileModel[])
+  //  });
+  //}
 
   public load(fileName: string, ContentType: string) {
 
@@ -43,4 +46,13 @@ export class MyFilesComponent implements OnInit {
     //});
   }
 
+  public Remove(fileName: string) {
+    this.http.delete(`https://localhost:7214/api/File/Blob?blobName=${fileName}`).subscribe(() => {
+      //setTimeout(,);
+      console.log("complete");
+      this.fileService.loadAll();
+    });
+    
+
+  }
 }

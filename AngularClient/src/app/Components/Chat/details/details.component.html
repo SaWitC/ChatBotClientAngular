@@ -45,17 +45,20 @@
               </div>
             </div>
           </ng-template>
-
         </div>
-        <div *ngIf="this.TypicalCommands.IsLastCommandSendFile"><!-- file upload command-->
-            <div class="card-body row text-right Bot-msg border-rad-80px m-2">
-              <div class="col-10 m-3">
-                <app-file-form></app-file-form>
-                <app-my-files></app-my-files>
+        <div>
+  
+          <!--<div *ngIf="this.IsLastTypicalCommand">-->
+            <!-- file upload command-->
+            <!--<div class="card-body row text-right Bot-msg border-rad-80px m-2">
+              <div class="col-10 m-3">-->
+                <ng-container #component></ng-container>
+              <!--</div>
+            </div>-->
+          </div>
 
-              </div>
-            </div>       
-        </div>
+        <!--</div>-->
+
       </div>
 
 

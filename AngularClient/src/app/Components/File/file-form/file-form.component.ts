@@ -44,7 +44,13 @@ export class FileFormComponent implements OnInit {
         observe: 'events'
       })
         .pipe(
-          finalize(() => this.reset())
+          finalize(() => {
+            console.log("complete");
+            //this.loadAll();
+            this.fileService.loadAll();
+
+            this.reset()
+          })
         );
 
       this.uploadSub = upload$.subscribe(event => {

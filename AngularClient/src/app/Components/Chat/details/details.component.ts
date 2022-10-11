@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, SimpleChanges, ViewChild, ViewContainerRef } from '@angular/core';
 import * as ChatHubService  from '../../../Services/SignalR/chat/chat.service';
 import { ChatService } from '../../../core/services/swagger-gen/api/chat.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
@@ -36,7 +36,10 @@ export class DetailsComponent implements OnInit {
       this.chatHubService.peopleMessageListener();
     }, 2000)
   }
-  
+
+  //component for dynamic load
+  @ViewChild('component', { read: ViewContainerRef })
+  container!: ViewContainerRef;
 
   ngOnInit(): void {
 
@@ -58,8 +61,6 @@ export class DetailsComponent implements OnInit {
         this.chatHubService.lastMessageFromBot = this.domSanitizer.bypassSecurityTrustHtml(lastElementFromArray.text)
 
         this.CurentChat.page = this.CurentChat.page - 1;
-
-
       }
     )
   }
@@ -67,12 +68,10 @@ export class DetailsComponent implements OnInit {
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
     if (this.chatdiv != null) {
-      //console.log(event)
       if (this.chatdiv.clientHeight + this.chatdiv.scrollTop + 1 > this.chatdiv.scrollHeight) {
         this.scrolToTheEnd = true;
       }
       else if (this.chatdiv.scrollTop == 0) {
-        console.log("222");
         this.scrolToTheEnd = false;
         this.chatdiv.scrollTop = 1;
         this.LoadOld();
@@ -89,10 +88,9 @@ export class DetailsComponent implements OnInit {
   public CurentChat: ChatDetails = new ChatDetails();
   public chatdiv: HTMLElement | null;
 
-
   msgText: string;
 
-
+  //firstLoad
   PageFirsLoad(): void {
     this.chatHubService.MessagesHistory = this.CurentChat.messages.reverse();
     let lastElementFromArray: Message = this.chatHubService.MessagesHistory[this.chatHubService.MessagesHistory.length - 1]
@@ -101,9 +99,8 @@ export class DetailsComponent implements OnInit {
 
     this.CurentChat.page = this.CurentChat.page - 1;
   }
-
+  //send message
   send(): void {
-    this.TypicalCommands.deactivateAll();//all commands will get the status false.
     if (!this.msgText.startsWith("@")) {
       var message = new Message();
       message.text = this.msgText;
@@ -114,7 +111,6 @@ export class DetailsComponent implements OnInit {
 
     }
     else {
-
       if (this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)) {
         var match = this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)
         let path: string = "";
@@ -126,7 +122,7 @@ export class DetailsComponent implements OnInit {
         this.router.navigate(["help"])
       }
       else if (this.msgText.match(/file\s{0,}/)) {
-        this.TypicalCommands.IsLastCommandSendFile = true;//last command sendFile
+        this.TypicalCommands.loadCommandSendFile(this.container);
       }
       else {
         alert("incorrect client command");
@@ -139,15 +135,6 @@ export class DetailsComponent implements OnInit {
       }
     }, 500)
    
-  }
-
-  ReplaceAll(text: string) {
-    var res = text.replace(/"/g, '');
-    return res;
-  }
-
-  RenderHtml(obj, text) {
-    obj.innerHtml = text;
   }
 
   LoadOld() {
@@ -164,6 +151,8 @@ export class DetailsComponent implements OnInit {
     });
   }
 
+
+  //Auto set date-time
   date: string;
   time: string;
 

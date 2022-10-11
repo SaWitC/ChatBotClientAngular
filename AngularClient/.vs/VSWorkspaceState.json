@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Chat",
-    "\\src\\app\\Components\\Chat\\details",
+    "\\src\\app\\Components\\Account",
+    "\\src\\app\\Components\\Account\\user-account",
     "\\src\\app\\Components\\File",
-    "\\src\\app\\Components\\File\\file-form",
-    "\\src\\app\\Models",
-    "\\src\\app\\Models\\File"
+    "\\src\\app\\Services",
+    "\\src\\app\\Services\\Chat",
+    "\\src\\app\\Services\\FileServer"
   ],
-  "SelectedNode": "\\src\\app\\Components\\File\\file-form\\file-form.component.html",
+  "SelectedNode": "\\src\\app\\app-routing.module.ts",
   "PreviewInSolutionExplorer": false
 }
