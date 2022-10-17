@@ -124,6 +124,9 @@ export class DetailsComponent implements OnInit {
       else if (this.msgText.match(/file\s{0,}/)) {
         this.TypicalCommands.loadCommandSendFile(this.container);
       }
+      else if (this.msgText.match(/g2048\s{0,}/)) {
+        this.TypicalCommands.loadCommandg2048(this.container);
+      }
       else {
         alert("incorrect client command");
       }

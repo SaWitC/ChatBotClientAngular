@@ -1,0 +1,29 @@
+<div class="row">
+  <div *ngFor="let box of this.Values" class="col-3">
+    <div *ngFor="let boxJ of box">
+
+
+      <app-block [value]="boxJ"></app-block>
+
+
+    </div>
+    
+  </div>
+
+</div>
+<div>
+  <button (click)="doleft()">⬅</button>
+  <button (click)="dorigth()">➡</button>
+  <button (click)="doBott()">⬇</button>
+  <button (click)="doTop()">⬆</button>
+
+
+  <!--<h1>====================</h1>
+  <button (click)="moveLeft()">left</button>
+  <button (click)="moveRight()">rifth</button>
+
+  <button (click)="moveTop()">top</button>
+  <button (click)="moveBott()">bott</button>
+
+  <button (click)="generate()">gen</button>-->
+</div>

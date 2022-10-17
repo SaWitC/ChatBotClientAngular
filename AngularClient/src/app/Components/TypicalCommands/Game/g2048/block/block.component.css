@@ -1,0 +1,26 @@
+.val-0 {
+  color: white;
+  background-color: white;
+}
+
+.val-2{
+  background-color:red;
+}
+
+.val-4 {
+  background-color: blue;
+}
+
+.val-8 {
+  background-color:crimson;
+}
+
+.val-16{
+    background-color:darkgreen;
+}
+
+
+.wh{
+    width:4rem;
+    height:4rem;
+}

@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { UserAccountRoutingModule } from './user-account-routing.module';
 import { UserAccountComponent } from './user-account.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [UserAccountComponent],
   imports: [
     CommonModule,
-    UserAccountRoutingModule
+    UserAccountRoutingModule,
+    FormsModule
   ]
 })
 export class UserAccountModule { }

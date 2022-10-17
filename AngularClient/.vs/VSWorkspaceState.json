@@ -4,13 +4,14 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Account",
-    "\\src\\app\\Components\\Account\\user-account",
-    "\\src\\app\\Components\\File",
+    "\\src\\app\\Components\\Chat",
+    "\\src\\app\\Components\\Chat\\details",
+    "\\src\\app\\Components\\TypicalCommands",
+    "\\src\\app\\Components\\TypicalCommands\\Game",
+    "\\src\\app\\Components\\TypicalCommands\\Game\\g2048",
     "\\src\\app\\Services",
-    "\\src\\app\\Services\\Chat",
-    "\\src\\app\\Services\\FileServer"
+    "\\src\\app\\Services\\Chat"
   ],
-  "SelectedNode": "\\src\\app\\app-routing.module.ts",
+  "SelectedNode": "\\src\\app\\Services\\Chat\\commands.service.ts",
   "PreviewInSolutionExplorer": false
 }

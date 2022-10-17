@@ -27,6 +27,8 @@ import { CreateComponent } from './Components/Chat/create/create.component';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { DetailsComponent } from './Components/Chat/details/details.component';
 import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
+//import { G2048Component } from './Components/TypicalCommands/Game/g2048/g2048.component';
+//import { BlockComponent } from './Components/TypicalCommands/Game/g2048/block/block.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -43,6 +45,8 @@ export function tokenGetter() {
     InfoComponent,
 /*    UserAccountComponent,*/
     VkConnectComponent,
+//G2048Component,
+//BlockComponent,
   ],
   imports: [
     MatDatepickerModule,
