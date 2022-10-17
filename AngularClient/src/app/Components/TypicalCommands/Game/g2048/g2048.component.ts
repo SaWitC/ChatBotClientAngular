@@ -18,15 +18,34 @@ export class G2048Component implements OnInit {
 
   ngOnInit(): void {
 
-    //this.Values
-    //this.ValuesCopy
-
-
     this.generate();
-    console.log("end gen");
+    this.generate();
+  }
+
+  checkWin() {
+    for (var i = 0; i < this.length; i++) {
+      for (var j = 0; j < this.length; j++) {
+        if (this.Values[i][j] == 2048) {
+          console.log(this.Values[i][j]);
+          alert("you win");
+          this.restart();
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  restart() {
+    this.Values = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
+    this.generate();
+    this.generate();
   }
 
   generate() {
+    if (this.checkWin())
+      return;
+
     var coords: coord[] = [];
      
     //get all empty boxes
@@ -45,12 +64,15 @@ export class G2048Component implements OnInit {
     //set value
     var rand = Math.floor(Math.random() * coords.length);
     var randomElement = coords[rand];
+    if (!randomElement) {
+      alert("you lose")
+      this.restart();
 
+    }
     this.Values[randomElement.x][randomElement.y] = 2;
   }
 
   dorigth() {
-
     let modified: boolean = false;
     let col = -1;
     var arrCopy = this.Values.slice();
@@ -69,9 +91,12 @@ export class G2048Component implements OnInit {
           continue;
         }
 
-        if (arrCopy[col][i] == arrCopy[y][i]) {
-          arrCopy[col][i] += arrCopy[y][i]; // merge same numbers
-          arrCopy[y][i] = 0;
+        if (arrCopy[col][i] == arrCopy[y][i] && col != y) {
+          var sum = arrCopy[col][i] + arrCopy[y][i];;
+          arrCopy[col][i] += arrCopy[y][i];
+          if (arrCopy[y][i] == 0 && arrCopy[col][i] == 0) {
+            arrCopy[y][i] = sum;
+          }
           col = -1; // reset
           modified = true;
         }
@@ -83,7 +108,11 @@ export class G2048Component implements OnInit {
       this.Values = arrCopy;
       console.log("modified");
     }
-    setTimeout(() => { this.moveRight(); this.generate(); }, 100)
+    setTimeout(() => {
+      var res = this.moveRight();
+      if (res)
+        this.generate();
+    }, 100)
 
     //this.moveRight();
     //this.generate();
@@ -109,9 +138,13 @@ export class G2048Component implements OnInit {
           continue;
         }
 
-        if (arrCopy[i][col] == arrCopy[i][y]) {
+        if (arrCopy[i][col] == arrCopy[i][y] && col != y) {
+          var sum = arrCopy[i][col] + arrCopy[i][y];
           arrCopy[i][col] += arrCopy[i][y]; // merge same numbers
           arrCopy[i][y] = 0;
+          if (arrCopy[i][y] == 0 && arrCopy[i][col] == 0) {
+            arrCopy[i][y] = sum;
+          }
           col = -1; // reset
           modified = true;
         }
@@ -122,7 +155,11 @@ export class G2048Component implements OnInit {
       console.log("modified");
     }
 
-    setTimeout(() => { this.moveBott(); this.generate(); },100)
+    setTimeout(() => {
+      var res = this.moveBott();
+      if (res)
+        this.generate();
+    }, 100)
     //this.doBott();
     //this.generate();
   }
@@ -148,9 +185,15 @@ export class G2048Component implements OnInit {
           continue;
         }
 
-        if (arrCopy[i][col] == arrCopy[i][y]) {
+        if (arrCopy[i][col] == arrCopy[i][y] && col != y) {
+
+         
+          var sum = arrCopy[i][col] + arrCopy[i][y];
           arrCopy[i][col] += arrCopy[i][y]; // merge same numbers
           arrCopy[i][y] = 0;
+          if (arrCopy[i][col]==0 && arrCopy[i][y]==0) {
+            arrCopy[i][y] = sum;
+          }
           col = -1; // reset
           modified = true;
         }
@@ -162,7 +205,14 @@ export class G2048Component implements OnInit {
       this.Values = arrCopy;
       console.log("modified");
     }
-    setTimeout(() => { this.moveTop(); this.generate(); }, 100)
+
+
+
+    setTimeout(() => {
+      var res = this.moveTop();
+      if (res)
+        this.generate();
+    }, 100)
 
     //this.moveTop();
     //this.generate();
@@ -174,7 +224,6 @@ export class G2048Component implements OnInit {
     var arrCopy = this.Values.slice();
     let modified: boolean = false;
     let col = -1;
-    let notnulvalueFounded: boolean = false;
 
     for (var i = 0; i < this.length; i++) {
       for (var y = 0; y < this.length; y++) {
@@ -185,13 +234,19 @@ export class G2048Component implements OnInit {
           continue;
         }
         if (arrCopy[col][i] != arrCopy[y][i]) {
-         // notnulvalueFounded = true;
           col = y; // update
           continue;
         }
-        if (arrCopy[col][i] == arrCopy[y][i]) {
+        if (arrCopy[col][i] == arrCopy[y][i] &&col!=y) {
+          console.log(col);
+          console.log(y);
+          var sum = arrCopy[col][i] + arrCopy[y][i];
           arrCopy[col][i] += arrCopy[y][i]; // merge same numbers
           arrCopy[y][i] = 0;
+          if (arrCopy[col][i]==0 && arrCopy[y][i]==0) {
+            arrCopy[y][i] = sum;
+          }
+
           col = -1; // reset
           modified = true;
         }
@@ -203,19 +258,18 @@ export class G2048Component implements OnInit {
       this.Values = arrCopy;
       console.log("modified");
     }
-
-
-
-    setTimeout(() => { this.moveLeft(); this.generate(); }, 100)
-    //this.moveLeft();
-    //this.generate();
+    setTimeout(() => {
+      var res = this.moveLeft();
+      if (res)
+        this.generate();
+    }, 100)
   }
 
 
-  moveLeft() {
+  moveLeft(): boolean {
     var arr: number[];
     var finalyArr: number[][];
-    finalyArr = this.Values;
+    finalyArr = this.Values.slice();
 
     for (var i = 0; i < this.length; i++) {
       var arr: number[] = [];
@@ -236,13 +290,17 @@ export class G2048Component implements OnInit {
       }
     }
     this.Values = finalyArr
+
+    if (finalyArr != this.Values)
+      return true
+    return false;
   }
 
-  moveRight() {
+  moveRight(): boolean{
        //move rigth
     var arr: number[];
     var finalyArr: number[][];
-    finalyArr = this.Values;
+    finalyArr = this.Values.slice();
 
     for (var i = 0; i < this.length; i++) {
       var arr: number[] = [];
@@ -251,7 +309,6 @@ export class G2048Component implements OnInit {
       for (var j = 0; j < this.length; j++) {
         arr[j] = this.Values[j][i];
         //console.log(this.Values[j][i]);
-
       }
       var arr = arr.filter(Number)
       arr = arr.reverse();
@@ -265,12 +322,17 @@ export class G2048Component implements OnInit {
         finalyArr[k][i] = arr[k]
       }
     }
+    if (finalyArr != this.Values)
+      return true
+    return false;
   }
 
-  moveTop() {
+  moveTop(): boolean{
     //move top
+    var finalyArr = this.Values.slice();
+
     for (var j = 0; j < this.length; j++) {
-      var res = this.Values[j].filter(Number)
+      var res = finalyArr[j].filter(Number)
       for (var i = 0; i < this.length; i++) {
         if (res[i] == undefined)
           res[i] = 0;
@@ -278,12 +340,18 @@ export class G2048Component implements OnInit {
       res.length = this.length;
       this.Values[j] = res;
     }
+    if (finalyArr != this.Values)
+      return true
+    return false;
   }
 
-  moveBott() {
+  moveBott(): boolean {
        //move bott
+
+    var finalyArr = this.Values.slice();
+
     for (var j = 0; j < this.length; j++) {
-      var res = this.Values[j].filter(Number)
+      var res = finalyArr[j].filter(Number)
       res = res.reverse();
       for (var i = 0; i < this.length; i++) {
         if (res[i] == undefined)
@@ -292,6 +360,9 @@ export class G2048Component implements OnInit {
       res.length = this.length;
       this.Values[j] = res.reverse();
     }
+    if (finalyArr != this.Values)
+      return true
+    return false;
 
   }
 

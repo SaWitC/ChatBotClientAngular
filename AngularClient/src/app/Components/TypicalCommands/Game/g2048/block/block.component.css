@@ -1,26 +1,53 @@
 .val-0 {
   color: white;
-  background-color: white;
+  background-color: #CB0077;
 }
 
-.val-2{
-  background-color:red;
+.val-2 {
+  background-color: #A2EF00;
 }
 
 .val-4 {
-  background-color: blue;
+  background-color: #00B358;
 }
 
 .val-8 {
-  background-color:crimson;
+  background-color: #FF3D00;
 }
 
-.val-16{
-    background-color:darkgreen;
+.val-16 {
+  background-color: #699B00;
 }
+
+.val-32 {
+  background-color: #007439;
+}
+.val-64 {
+  background-color: #A62800;
+}
+.val-128 {
+  background-color: #84004D;
+}
+
+
+.val-256 {
+  background-color: #E567B1;
+}
+.val-512 {
+  background-color: #FF9473;
+}
+.val-1024 {
+  background-color: #62D99C;
+}
+.val-2048 {
+  background-color: #CBF76F;
+}
+
+
 
 
 .wh{
     width:4rem;
     height:4rem;
+    
 }
