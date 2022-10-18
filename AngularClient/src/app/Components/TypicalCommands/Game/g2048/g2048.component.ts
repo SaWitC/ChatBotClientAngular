@@ -11,8 +11,6 @@ export class G2048Component implements OnInit {
   constructor() { }
 
   public Values: number[][] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-  //public ValuesCopy: number[][] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
-
 
   length: number = 4;
 
@@ -111,11 +109,9 @@ export class G2048Component implements OnInit {
     setTimeout(() => {
       var res = this.moveRight();
       if (res)
+        console.log(res);
         this.generate();
     }, 100)
-
-    //this.moveRight();
-    //this.generate();
   }
 
   doBott() {
@@ -157,11 +153,9 @@ export class G2048Component implements OnInit {
 
     setTimeout(() => {
       var res = this.moveBott();
-      if (res)
+      if (!res)
         this.generate();
     }, 100)
-    //this.doBott();
-    //this.generate();
   }
 
 
@@ -213,9 +207,6 @@ export class G2048Component implements OnInit {
       if (res)
         this.generate();
     }, 100)
-
-    //this.moveTop();
-    //this.generate();
   }
 
   doleft() {
@@ -260,7 +251,8 @@ export class G2048Component implements OnInit {
     }
     setTimeout(() => {
       var res = this.moveLeft();
-      if (res)
+      console.log("res "+res);
+      if (!res)
         this.generate();
     }, 100)
   }
@@ -268,15 +260,13 @@ export class G2048Component implements OnInit {
 
   moveLeft(): boolean {
     var arr: number[];
-    var finalyArr: number[][];
-    finalyArr = this.Values.slice();
+    var finalyArr = structuredClone(this.Values)
 
     for (var i = 0; i < this.length; i++) {
       var arr: number[] = [];
       arr.length = this.length;
       for (var j = 0; j < this.length; j++) {
-        arr[j] = this.Values[j][i];
-
+        arr[j] = finalyArr[j][i];
       }
       var arr = arr.filter(Number)
       arr.length = this.length;
@@ -289,18 +279,17 @@ export class G2048Component implements OnInit {
         finalyArr[k][i] = arr[k]
       }
     }
-    this.Values = finalyArr
-
-    if (finalyArr != this.Values)
-      return true
-    return false;
+    var isEqual = this.isArrayEqueals(finalyArr, this.Values);
+    if (!isEqual) {
+      this.Values = finalyArr;
+    }
+    return isEqual;
   }
 
   moveRight(): boolean{
        //move rigth
     var arr: number[];
-    var finalyArr: number[][];
-    finalyArr = this.Values.slice();
+    var finalyArr = structuredClone(this.Values)
 
     for (var i = 0; i < this.length; i++) {
       var arr: number[] = [];
@@ -308,7 +297,6 @@ export class G2048Component implements OnInit {
       arr.length = this.length;
       for (var j = 0; j < this.length; j++) {
         arr[j] = this.Values[j][i];
-        //console.log(this.Values[j][i]);
       }
       var arr = arr.filter(Number)
       arr = arr.reverse();
@@ -322,9 +310,12 @@ export class G2048Component implements OnInit {
         finalyArr[k][i] = arr[k]
       }
     }
-    if (finalyArr != this.Values)
-      return true
-    return false;
+    var isEqual = this.isArrayEqueals(finalyArr, this.Values);
+    if (!isEqual) {
+      this.Values = finalyArr;
+    }
+    return isEqual;
+
   }
 
   moveTop(): boolean{
@@ -338,16 +329,17 @@ export class G2048Component implements OnInit {
           res[i] = 0;
       }
       res.length = this.length;
-      this.Values[j] = res;
+      finalyArr[j] = res;
     }
-    if (finalyArr != this.Values)
-      return true
-    return false;
+    var isEqual = this.isArrayEqueals(finalyArr, this.Values);
+    if (!isEqual) {
+      this.Values = finalyArr;
+    }
+    return isEqual;
+
   }
 
   moveBott(): boolean {
-       //move bott
-
     var finalyArr = this.Values.slice();
 
     for (var j = 0; j < this.length; j++) {
@@ -358,14 +350,27 @@ export class G2048Component implements OnInit {
           res[i] = 0;
       }
       res.length = this.length;
-      this.Values[j] = res.reverse();
+      finalyArr[j] = res.reverse();
     }
-    if (finalyArr != this.Values)
-      return true
-    return false;
 
+    var isEqual = this.isArrayEqueals(finalyArr, this.Values);
+    if (!isEqual) {
+      this.Values = finalyArr;
+    }
+    return isEqual;
   }
 
+
+  private isArrayEqueals(arr1: number[][], arr2: number[][]) {
+    for (var i = 0; i < this.length; i++) {
+      for (var j = 0; j < this.length; j++) {
+        if (arr1[i][j] != arr2[i][j]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
 
 
 }

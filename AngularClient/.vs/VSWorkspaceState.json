@@ -8,9 +8,8 @@
     "\\src\\app\\Components\\TypicalCommands\\Game",
     "\\src\\app\\Components\\TypicalCommands\\Game\\g2048",
     "\\src\\app\\Components\\TypicalCommands\\Game\\g2048\\block",
-    "\\src\\app\\Services",
-    "\\src\\app\\Services\\Chat"
+    "\\src\\app\\core"
   ],
-  "SelectedNode": "\\src\\app\\Components\\TypicalCommands\\Game\\g2048\\g2048.component.ts",
+  "SelectedNode": "\\src\\app\\Services",
   "PreviewInSolutionExplorer": false
 }
