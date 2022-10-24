@@ -25,7 +25,6 @@ export class G2048Component implements OnInit {
     for (var i = 0; i < this.length; i++) {
       for (var j = 0; j < this.length; j++) {
         if (this.Values[i][j] == 2048) {
-          console.log(this.Values[i][j]);
           this.toastr.info("you win","info");
           this.restart();
           return true;
@@ -66,7 +65,6 @@ export class G2048Component implements OnInit {
     if (!randomElement) {
       this.toastr.warning("you lose","lose");
       this.restart();
-
     }
     this.Values[randomElement.x][randomElement.y] = 2;
   }
@@ -105,12 +103,10 @@ export class G2048Component implements OnInit {
     
     if (modified) {
       this.Values = arrCopy;
-      console.log("modified");
     }
     setTimeout(() => {
       var res = this.moveRight();
-      if (res)
-        console.log(res);
+      if (res || modified)
         this.generate();
     }, 100)
   }
@@ -149,12 +145,11 @@ export class G2048Component implements OnInit {
     }
     if (modified) {
       this.Values = arrCopy;
-      console.log("modified");
     }
 
     setTimeout(() => {
       var res = this.moveBott();
-      if (!res)
+      if (!res || modified)
         this.generate();
     }, 100)
   }
@@ -198,14 +193,11 @@ export class G2048Component implements OnInit {
 
     if (modified) {
       this.Values = arrCopy;
-      console.log("modified");
     }
-
-
 
     setTimeout(() => {
       var res = this.moveTop();
-      if (res)
+      if (res || modified)
         this.generate();
     }, 100)
   }
@@ -230,8 +222,6 @@ export class G2048Component implements OnInit {
           continue;
         }
         if (arrCopy[col][i] == arrCopy[y][i] &&col!=y) {
-          console.log(col);
-          console.log(y);
           var sum = arrCopy[col][i] + arrCopy[y][i];
           arrCopy[col][i] += arrCopy[y][i]; // merge same numbers
           arrCopy[y][i] = 0;
@@ -245,19 +235,15 @@ export class G2048Component implements OnInit {
       }
     }
 
-
     if (modified) {
       this.Values = arrCopy;
-      console.log("modified");
     }
     setTimeout(() => {
       var res = this.moveLeft();
-      console.log("res "+res);
-      if (!res)
+      if (!res || modified)
         this.generate();
     }, 100)
   }
-
 
   private moveLeft(): boolean {
     var arr: number[];
@@ -288,7 +274,6 @@ export class G2048Component implements OnInit {
   }
 
   private moveRight(): boolean{
-       //move rigth
     var arr: number[];
     var finalyArr = structuredClone(this.Values)
 
@@ -320,7 +305,6 @@ export class G2048Component implements OnInit {
   }
 
   private moveTop(): boolean{
-    //move top
     var finalyArr = this.Values.slice();
 
     for (var j = 0; j < this.length; j++) {
@@ -337,7 +321,6 @@ export class G2048Component implements OnInit {
       this.Values = finalyArr;
     }
     return isEqual;
-
   }
 
   private moveBott(): boolean {
