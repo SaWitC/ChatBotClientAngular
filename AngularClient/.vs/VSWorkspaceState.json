@@ -4,12 +4,14 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
+    "\\src\\app\\Components\\Chat",
+    "\\src\\app\\Components\\Chat\\create",
     "\\src\\app\\Components\\TypicalCommands",
     "\\src\\app\\Components\\TypicalCommands\\Game",
     "\\src\\app\\Components\\TypicalCommands\\Game\\g2048",
-    "\\src\\app\\Components\\TypicalCommands\\Game\\g2048\\block",
-    "\\src\\app\\core"
+    "\\src\\app\\Services",
+    "\\src\\app\\Services\\Chat"
   ],
-  "SelectedNode": "\\src\\app\\Services",
+  "SelectedNode": "\\src\\app\\Components\\Chat\\create\\create.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { empty } from 'rxjs';
 
 @Component({
@@ -8,7 +9,7 @@ import { empty } from 'rxjs';
 })
 export class G2048Component implements OnInit {
 
-  constructor() { }
+  constructor(private toastr: ToastrService) { }
 
   public Values: number[][] = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
 
@@ -20,12 +21,12 @@ export class G2048Component implements OnInit {
     this.generate();
   }
 
-  checkWin() {
+  private checkWin() {
     for (var i = 0; i < this.length; i++) {
       for (var j = 0; j < this.length; j++) {
         if (this.Values[i][j] == 2048) {
           console.log(this.Values[i][j]);
-          alert("you win");
+          this.toastr.info("you win","info");
           this.restart();
           return true;
         }
@@ -34,13 +35,13 @@ export class G2048Component implements OnInit {
     return false;
   }
 
-  restart() {
+  private restart() {
     this.Values = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]];
     this.generate();
     this.generate();
   }
 
-  generate() {
+  private generate() {
     if (this.checkWin())
       return;
 
@@ -63,7 +64,7 @@ export class G2048Component implements OnInit {
     var rand = Math.floor(Math.random() * coords.length);
     var randomElement = coords[rand];
     if (!randomElement) {
-      alert("you lose")
+      this.toastr.warning("you lose","lose");
       this.restart();
 
     }
@@ -258,7 +259,7 @@ export class G2048Component implements OnInit {
   }
 
 
-  moveLeft(): boolean {
+  private moveLeft(): boolean {
     var arr: number[];
     var finalyArr = structuredClone(this.Values)
 
@@ -286,7 +287,7 @@ export class G2048Component implements OnInit {
     return isEqual;
   }
 
-  moveRight(): boolean{
+  private moveRight(): boolean{
        //move rigth
     var arr: number[];
     var finalyArr = structuredClone(this.Values)
@@ -318,7 +319,7 @@ export class G2048Component implements OnInit {
 
   }
 
-  moveTop(): boolean{
+  private moveTop(): boolean{
     //move top
     var finalyArr = this.Values.slice();
 
@@ -339,7 +340,7 @@ export class G2048Component implements OnInit {
 
   }
 
-  moveBott(): boolean {
+  private moveBott(): boolean {
     var finalyArr = this.Values.slice();
 
     for (var j = 0; j < this.length; j++) {
@@ -371,8 +372,6 @@ export class G2048Component implements OnInit {
     }
     return true;
   }
-
-
 }
 
 class coord {

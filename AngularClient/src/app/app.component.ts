@@ -31,10 +31,6 @@ export class AppComponent implements OnInit {
       this.HotifySignlaR.startConnection();
   }
 
-  onChanged(increased: any) {
-    this.remindCustomService.SetAnyReminds()
-  }
-
   @HostListener('window:unload', ['$event'])
   unloadHandler(event) {
     this.closeConnection();

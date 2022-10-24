@@ -3,6 +3,7 @@ import { outputAst } from '@angular/compiler';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ApiModule } from '../../../core/services/swagger-gen';
 import { AccountService } from '../../../core/services/swagger-gen/api/account.service'
@@ -24,7 +25,11 @@ export class LoginComponent implements OnInit {
   @Output() onRouted = new EventEmitter<boolean>();
   @Output() onChanged = new EventEmitter<boolean>();
 
-  constructor(public apiModeule: ApiModule, public accountService: CustomAccountService, public remindCustomService: RemindCustomService, private router: Router) { }
+  constructor(public apiModeule: ApiModule,
+    public accountService: CustomAccountService,
+    public remindCustomService: RemindCustomService,
+    private router: Router,
+    private toastr: ToastrService  ) { }
 
   public Submited: boolean = false;
   ngOnInit(): void {
@@ -44,30 +49,21 @@ export class LoginComponent implements OnInit {
     this.accountService.login(model).subscribe(
       res => {
         localStorage.setItem("jwt", res as string)
-
-          alert("you signedin");
-          location.reload();
-
- 
+        this.toastr.info("you signedin","info");
       },
       err => {
-        console.log(err);
-        this.errorMessage = "Сервер не отвечает";
+        this.toastr.error("the server cannot fulfill your request","error");
         this.isRequestCompletedIncorrect = true;
       },
-      () => {
-        
-      }
     );
 
-    this.remindCustomService.getActualAndExpiredReminds().subscribe(res => {
-      this.remindCustomService.activeReminders = res as Reminds[];
+    //this.remindCustomService.getActualAndExpiredReminds().subscribe(res => {
+    //  this.remindCustomService.activeReminders = res as Reminds[];
 
-      this.onChanged.emit(true);
-      // this.remindCustomService.SetAnyReminds();
-    },
-      err => {
-        console.log(err);
-      });
+    //  this.onChanged.emit(true);
+    //},
+    //  err => {
+    //    console.log(err);
+    //  });
   }
 }

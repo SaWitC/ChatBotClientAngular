@@ -13,6 +13,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
 import { CustomMessagesService } from '../../../Services/Chat/Message/custom-messages.service';
 import { CommandsService } from '../../../Services/Chat/commands.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-details',
@@ -29,7 +30,8 @@ export class DetailsComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private messageService: CustomMessagesService,
     public domSanitizer: DomSanitizer,
-    public TypicalCommands: CommandsService) {
+    public TypicalCommands: CommandsService,
+    private toastr: ToastrService) {
 
     setTimeout(() => {
       this.chatHubService.askServerListener();
@@ -128,7 +130,7 @@ export class DetailsComponent implements OnInit {
         this.TypicalCommands.loadCommandg2048(this.container);
       }
       else {
-        alert("incorrect client command");
+        this.toastr.warning("incorrect client command","warning");
       }
       
     }

@@ -6,7 +6,7 @@
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label class="text-white">Chat Title</mat-label>
-          <input matInput required ngModel #title="ngModel" name="title" />
+          <input matInput class="text-white" required ngModel #title="ngModel" name="title" />
         </mat-form-field>
         <span *ngIf="(title.touched || this.isSubmitted) && title.invalid" class="text-danger">
           title is Required

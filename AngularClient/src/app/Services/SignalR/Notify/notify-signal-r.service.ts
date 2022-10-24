@@ -6,13 +6,14 @@ import { Message } from '../../../Models/Message/message.model';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ChatService, Configuration } from '../../../core/services/swagger-gen';
 import { protocol_botServerDomain } from '../../../../../env';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotifySignalRService {
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
   }
 
   hubConnection: signalR.HubConnection;
@@ -72,7 +73,7 @@ export class NotifySignalRService {
 
   NotifyMessageListener() {
     this.hubConnection.on("Notify", (mes) => {
-      alert(mes);
+      this.toastr.show(mes,"reminder");
     })
   }
 }

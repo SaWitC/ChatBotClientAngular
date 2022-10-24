@@ -7,7 +7,7 @@ import { BlockComponent } from './block/block.component';
 
 @NgModule({
   declarations: [G2048Component,
-    BlockComponent,],
+    BlockComponent],
   imports: [
     CommonModule
   ]

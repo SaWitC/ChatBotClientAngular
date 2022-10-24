@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { ChatService } from '../../../core/services/swagger-gen';
 import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.service';
 
@@ -11,7 +12,8 @@ import { CustomChatService } from '../../../Services/Chat/Chat/custom-chat.servi
 })
 export class CreateComponent implements OnInit {
 
-  constructor(public chatService: CustomChatService) { }
+  constructor(public chatService: CustomChatService,
+    private toastr: ToastrService  ) { }
 
   public isSubmitted: boolean = false;
 
@@ -23,10 +25,10 @@ export class CreateComponent implements OnInit {
     console.log(form.value.title);
     this.chatService.createChat({ title: form.value.title }).subscribe(
       res => {
-        console.log(res);
+        this.toastr.success("new chatCreated","");
       },
       err => {
-        console.log(err);
+        this.toastr.error("server cannot fulfill your request");
       }    )
   }
 }

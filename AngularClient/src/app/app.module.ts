@@ -21,14 +21,13 @@ import { CustomChatService } from './Services/Chat/Chat/custom-chat.service';
 import { botServerDomain, FileServerDomain } from '../../env';
 import { CustomMessagesService } from './Services/Chat/Message/custom-messages.service';
 import { InfoComponent } from './Components/Info/info/info.component';
-//import { UserAccountComponent } from './Components/Account/user-account/user-account.component';
 import { VkConnectComponent } from './Components/Account/Vk/vk-connect/vk-connect.component';
 import { CreateComponent } from './Components/Chat/create/create.component';
 import { MyChatsComponent } from './Components/Chat/my-chats/my-chats.component';
 import { DetailsComponent } from './Components/Chat/details/details.component';
 import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
-//import { G2048Component } from './Components/TypicalCommands/Game/g2048/g2048.component';
-//import { BlockComponent } from './Components/TypicalCommands/Game/g2048/block/block.component';
+import { ErrorComponent } from './Components/InformationPages/error/error.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -43,16 +42,15 @@ export function tokenGetter() {
     CreateComponent,
     RegisterComponent,
     InfoComponent,
-/*    UserAccountComponent,*/
     VkConnectComponent,
-//G2048Component,
-//BlockComponent,
+ErrorComponent,
   ],
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
     MatInputModule,
     ReactiveFormsModule,
     BrowserModule,
@@ -69,7 +67,7 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule,
   ],
-  exports: [FormsModule, ReactiveFormsModule],
+  exports: [FormsModule, ReactiveFormsModule, ToastrModule, BrowserAnimationsModule],
   providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, NotifySignalRService],
   bootstrap: [AppComponent]
 })
