@@ -32,7 +32,6 @@ export class MyFilesComponent implements OnInit {
 
     this.http.get(`https://localhost:7214/api/File/Blob/${fileName}`, { responseType: 'blob' }).subscribe(
       (res: Blob) => {
-        console.log(res)
         var blob = new Blob([res], { type: ContentType });
         const url = window.URL.createObjectURL(blob);
         window.open(url);
@@ -48,8 +47,6 @@ export class MyFilesComponent implements OnInit {
 
   public Remove(fileName: string) {
     this.http.delete(`https://localhost:7214/api/File/Blob?blobName=${fileName}`).subscribe(() => {
-      //setTimeout(,);
-      console.log("complete");
       this.fileService.loadAll();
     });
     

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../../../../core/services/swagger-gen';
 import { VkLogin } from '../../../../Models/Account/Login/vk-login.model';
 import { CustomAccountService } from '../../../../Services/Account/custom-account.service';
@@ -12,7 +13,9 @@ import { CustomVkService } from '../../../../Services/AditionalServices/Vk/custo
 })
 export class VkConnectComponent implements OnInit {
 
-  constructor(public suctomAccountService: CustomAccountService, public vkService: CustomVkService) { }
+  constructor(public suctomAccountService: CustomAccountService,
+    public vkService: CustomVkService,
+    private toastr: ToastrService  ) { }
 
   ngOnInit(): void {
 
@@ -28,11 +31,11 @@ export class VkConnectComponent implements OnInit {
 
     this.vkService.tryConectToVk(this.email, this.password).subscribe(
       res => {
-        //console.log(res)
+        this.toastr.success("request are sended", "succes");
       },
       err => {
-        console.log(err);
-      }    );
+        this.toastr.error("srever cannot fulfill your request", "error");
+      });
   }
 
 }

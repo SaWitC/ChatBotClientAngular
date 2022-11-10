@@ -10,13 +10,7 @@ export class FileComponent implements OnInit {
 
   @ViewChild('uploadFilecontainer', { read: ViewContainerRef })
   uploadFileContainer!: ViewContainerRef;
-
-  @ViewChild('myFilescontainer', { read: ViewContainerRef })
-  myFilesContainer!: ViewContainerRef;
-
   public myFileisShowed: boolean = false;
-
-
 
   constructor() { }
 
@@ -27,12 +21,12 @@ export class FileComponent implements OnInit {
     });
   }
 
-  loadMyFiles() {
-    import('../my-files/my-files.component').then((module) => {
-      const component = module['FileFormComponent'];
-      this.myFilesContainer?.createComponent(component);
-      this.myFileisShowed = true;
-    });
-  }
+  //loadMyFiles() {
+  //  import('../my-files/my-files.component').then((module) => {
+  //    const component = module['FileFormComponent'];
+  //    //this.myFilesContainer?.createComponent(component);
+  //    this.myFileisShowed = true;
+  //  });
+  //}
 
 }

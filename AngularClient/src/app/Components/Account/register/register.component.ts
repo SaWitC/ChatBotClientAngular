@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AccountService } from '../../../core/services/swagger-gen';
+import { ToastrService } from 'ngx-toastr';
 import { RegisterMdoel } from '../../../Models/Account/Register/register-mdoel.model';
+import { CustomExceptionModel } from '../../../Models/Error/custom-exception-model.model';
 import { CustomAccountService } from '../../../Services/Account/custom-account.service';
 import { AccoutValidatorService } from '../../../Services/Validation/AccountValidators/accout-validator.service';
 
@@ -12,7 +14,10 @@ import { AccoutValidatorService } from '../../../Services/Validation/AccountVali
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private accountValidationService: AccoutValidatorService, private accoutnService: CustomAccountService) { }
+  constructor(private formBuilder: FormBuilder,
+    private accountValidationService: AccoutValidatorService,
+    private accoutnService: CustomAccountService,
+    private toastr: ToastrService) { }
 
   public submitted = false;
 
@@ -46,11 +51,17 @@ export class RegisterComponent implements OnInit {
     registerModel.password = this.registerGroup.controls["Password"].value;
     registerModel.confirmPass = this.registerGroup.controls["ConfirmPass"].value;
 
-    console.log("1")
-
     this.accoutnService.register(registerModel).subscribe(res => {
-      console.log("ok")
+      this.toastr.success("you have registered a new account");
     },
-      err => console.log(err));
+      (err) => {
+        var exc = err as HttpErrorResponse;
+        var error = exc.error as CustomExceptionModel;
+        console.log(exc.status);
+        if (exc.status == 400) 
+          this.toastr.info(error.detail,"Info");
+        else
+          this.toastr.error("the server cannot fulfill your request", "error");
+      });
   }
 }

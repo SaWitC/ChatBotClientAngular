@@ -57,6 +57,7 @@ ErrorComponent,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     ApiModule,
     JwtModule.forRoot({
       config: {
@@ -65,7 +66,7 @@ ErrorComponent,
         disallowedRoutes:[],
       }
     }),
-    BrowserAnimationsModule,
+    
   ],
   exports: [FormsModule, ReactiveFormsModule, ToastrModule, BrowserAnimationsModule],
   providers: [CustomChatService, AuthGuardService, RemindCustomService, CustomChatService, CustomMessagesService, NotifySignalRService],

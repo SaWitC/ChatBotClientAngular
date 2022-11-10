@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { UpdateData } from '../../../Models/Account/User/Update/update-data.model';
 import { UserModel } from '../../../Models/Account/User/User/user-model.=model';
 import { CustomAccountService } from '../../../Services/Account/custom-account.service';
@@ -13,18 +14,15 @@ export class UserAccountComponent implements OnInit {
 
   public routesPath = RoutesPath;
 
-  constructor(public customAccountService: CustomAccountService) {
+  constructor(public customAccountService: CustomAccountService,
+    private toastr: ToastrService  ) {
     this.customAccountService.getPersonalData().subscribe(res => {
-      //console.log(res)
-       console.log(res as UserModel)
-
       this.customAccountService.CurentUser = res as UserModel;
     },
-     err => {
-       console.log(err);
+      err => {
+        this.toastr.error("can not load the personal data","error");
       }
     );
-    
   }
 
   ngOnInit(): void {
@@ -33,18 +31,16 @@ export class UserAccountComponent implements OnInit {
   SaveSendStatus() {
     
     if (this.customAccountService.CurentUser.sendToVk != undefined) {
-      console.log(this.customAccountService.CurentUser.sendToVk)
-
-
       var userData: UpdateData = new UpdateData()
       userData.sendToVk = this.customAccountService.CurentUser.sendToVk;
       this.customAccountService.updatePersonalData(userData).subscribe(
         res => {
-          console.log("1");
+          this.toastr.success("changes are saved", "succes");
           this.customAccountService.CurentUser = res as UserModel;
         },
         err => {
-          console.log(err);
+          
+          this.toastr.error("cannot caveChanges try later", "error");
         }
       );
     }

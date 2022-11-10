@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { finalize, Subscription } from 'rxjs';
 import { CustomFileService } from '../../../Services/FileServer/FileService/custom-file.service';
 import { FileServerDomain } from '../../../../../env';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-file-form',
@@ -11,7 +12,10 @@ import { FileServerDomain } from '../../../../../env';
 })
 export class FileFormComponent implements OnInit {
 
-  constructor(public fileService: CustomFileService, private http: HttpClient) { }
+  constructor(public fileService: CustomFileService,
+    private http: HttpClient,
+    private toastr: ToastrService
+  ) { }
 
 
 
@@ -45,7 +49,8 @@ export class FileFormComponent implements OnInit {
       })
         .pipe(
           finalize(() => {
-            console.log("complete");
+            this.toastr.success("file upload complete","succes")
+            //console.log("complete");
             //this.loadAll();
             this.fileService.loadAll();
 

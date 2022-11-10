@@ -10,6 +10,7 @@ import { AccountService } from '../../../core/services/swagger-gen/api/account.s
 import { LoginCommand } from '../../../core/services/swagger-gen/model/loginCommand'
 import { LoginModel } from '../../../Models/Account/Login/login-model.model';
 import { Reminds } from '../../../Models/CommandResponseModels/Reminds/reminds.model';
+import { CustomExceptionModel } from '../../../Models/Error/custom-exception-model.model';
 import { CustomAccountService } from '../../../Services/Account/custom-account.service';
 import { RemindCustomService } from '../../../Services/Commands/Remind/remind.service';
 import { MyChats } from '../../../Services/Routes';
@@ -28,7 +29,6 @@ export class LoginComponent implements OnInit {
   constructor(public apiModeule: ApiModule,
     public accountService: CustomAccountService,
     public remindCustomService: RemindCustomService,
-    private router: Router,
     private toastr: ToastrService  ) { }
 
   public Submited: boolean = false;
@@ -51,19 +51,15 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("jwt", res as string)
         this.toastr.info("you signedin","info");
       },
-      err => {
-        this.toastr.error("the server cannot fulfill your request","error");
-        this.isRequestCompletedIncorrect = true;
-      },
+      (err) => {
+        var exc = err as HttpErrorResponse;
+        var error = exc.error as CustomExceptionModel;
+        console.log(exc.status);
+        if (exc.status == 400)
+          this.toastr.info(error.detail, "Info");
+        else
+          this.toastr.error("the server cannot fulfill your request", "error");
+      }
     );
-
-    //this.remindCustomService.getActualAndExpiredReminds().subscribe(res => {
-    //  this.remindCustomService.activeReminders = res as Reminds[];
-
-    //  this.onChanged.emit(true);
-    //},
-    //  err => {
-    //    console.log(err);
-    //  });
   }
 }

@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FileComponent } from './file.component';
 import { MyFilesComponent } from '../my-files/my-files.component';
 
-
-
 @NgModule({
   declarations: [FileComponent],
   exports:[MyFilesComponent],
@@ -12,7 +10,5 @@ import { MyFilesComponent } from '../my-files/my-files.component';
     CommonModule,
   ]
 })
-
-
 
 export class FileModule { }

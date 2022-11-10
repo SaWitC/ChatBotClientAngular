@@ -50,10 +50,10 @@ export class DetailsComponent implements OnInit {
 
     var subj =this.chatService.details(this.id).subscribe
       (res => {
-        this.CurentChat = res as ChatDetails;
-        
+        this.CurentChat = res as ChatDetails;     
       },
-      err => { console.log(err) },
+        err =>
+        { this.toastr.error("can't load details") },
         () => {
           this.chatdiv = document.getElementById("chatdiv");
 
@@ -110,26 +110,25 @@ export class DetailsComponent implements OnInit {
 
       this.chatHubService.MessagesHistory.push(message)
       this.chatHubService.askServer(this.msgText, this.id);
-
     }
     else {
-      if (this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)) {
+      if (this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)) {//navigate
         var match = this.msgText.match(/nav\s{0,}/ || /navigate\s{0,}/)
         let path: string = "";
         if (match != null)
           path = this.msgText.replace(match[0], "");
         this.router.navigate([path.substring(1)])
-      }
+      }//help
       else if (this.msgText.match(/help\s{0,}/)) {
         this.router.navigate(["help"])
-      }
+      }//files
       else if (this.msgText.match(/file\s{0,}/)) {
         this.TypicalCommands.loadCommandSendFile(this.container);
-      }
+      }//game 2048
       else if (this.msgText.match(/g2048\s{0,}/)) {
         this.TypicalCommands.loadCommandg2048(this.container);
       }
-      else {
+      else {//deffault
         this.toastr.warning("incorrect client command","warning");
       }
       
@@ -148,15 +147,12 @@ export class DetailsComponent implements OnInit {
     this.messageService.getMessages(this.CurentChat.page, this.CurentChat.id).subscribe(res => {
       var mess = res as Message[];
       mess = mess.reverse();
-
-
       this.chatHubService.MessagesHistory = mess.reverse().concat(this.chatHubService.MessagesHistory);
     },
-      err =>{
+      err => {
+        this.CurentChat.page++;
     });
   }
-
-
   //Auto set date-time
   date: string;
   time: string;

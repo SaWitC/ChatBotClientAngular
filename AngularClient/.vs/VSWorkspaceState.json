@@ -4,13 +4,10 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Chat",
-    "\\src\\app\\Components\\TypicalCommands",
-    "\\src\\app\\Components\\TypicalCommands\\Game",
-    "\\src\\app\\Components\\TypicalCommands\\Game\\g2048",
+    "\\src\\app\\Components\\Account",
     "\\src\\app\\Services",
-    "\\src\\app\\Services\\Chat"
+    "\\src\\app\\Services\\Error"
   ],
-  "SelectedNode": "\\src\\app\\Components\\TypicalCommands\\Game\\g2048\\g2048.component.ts",
+  "SelectedNode": "\\src\\app\\Components\\Account\\login",
   "PreviewInSolutionExplorer": false
 }
