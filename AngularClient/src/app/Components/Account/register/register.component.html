@@ -25,47 +25,47 @@
 
       <span class="text-danger"
             *ngIf="(registerFormControls['Email'].touched || submitted) && registerFormControls['Email'].errors?.['required']">
-        <br>Email is required
+        <br i18n>Email is required
       </span>
       <span class="text-danger"
             *ngIf="registerFormControls['Email'].touched && registerFormControls['Email'].invalid">
-        <br>Incorrect Email
+        <br i18n>Incorrect Email
       </span>
     </div>
 
     <div class="form-group">
       <mat-form-field class="w-100">
-        <mat-label class="text-white">Password</mat-label>
+        <mat-label i18n class="text-white">Password</mat-label>
         <input matInput formControlName="Password" name="Password" placeholder="User Name" required />
 
       </mat-form-field>
 
       <span class="text-danger"
             *ngIf="(registerFormControls['Password'].touched || submitted) && registerFormControls['Password'].errors?.['required']">
-        <br>Password is required
+        <br i18n>Password is required
       </span>
       <span class="text-danger"
             *ngIf="registerFormControls['Password'].touched && registerFormControls['Password'].invalid">
-        <br>password required must have minimum 6 symbols
-        <br>password sould have minimum one symbol
-        <br>password sould have minimum one number
-        <br>password sould have minimum one upper case leter
-        <br>password sould have minimum one lower case leter
+        <br i18n>password required must have minimum 6 symbols
+        <br i18n>password sould have minimum one symbol
+        <br i18n>password sould have minimum one number
+        <br i18n>password sould have minimum one upper case leter
+        <br i18n>password sould have minimum one lower case leter
       </span>
     </div>
 
     <div class="form-group">
       <mat-form-field class="w-100">
-        <mat-label class="text-white">ConfirmPass</mat-label>
+        <mat-label class="text-white" i18n>ConfirmPass</mat-label>
         <input matInput formControlName="ConfirmPass" name="ConfirmPass" placeholder="User Name" required />
 
       </mat-form-field>
 
       <span class="text-danger"
             *ngIf="(registerFormControls['ConfirmPass'].touched || submitted) && registerFormControls['ConfirmPass'].errors?.['required']">
-        <br>Confirm Password is required
+        <br i18n>Confirm Password is required
       </span>
-      <span class="text-danger"
+      <span i18n class="text-danger"
             *ngIf="registerFormControls['ConfirmPass'].touched && registerFormControls['ConfirmPass'].invalid">
         the confirmation password must be equal to the password
       </span>
@@ -149,7 +149,7 @@
     </div>-->
 
     <div class="text-center">
-      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit">submit</button>
+      <button i18n class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit">submit</button>
       <!--<button class="btn text-white border mt-2" type="submit">submit</button>-->
     </div>
   </form>

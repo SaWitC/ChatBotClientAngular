@@ -5,14 +5,14 @@
     
       <div class="form-group">
         <mat-form-field class="w-100">
-          <mat-label class="text-white">Chat Title</mat-label>
+          <mat-label class="text-white" i18n>Chat Title</mat-label>
           <input matInput class="text-white" required ngModel #title="ngModel" name="title" />
         </mat-form-field>
-        <span *ngIf="(title.touched || this.isSubmitted) && title.invalid" class="text-danger">
+        <span *ngIf="(title.touched || this.isSubmitted) && title.invalid" class="text-danger" i18n>
           title is Required
         </span>
       </div>
-      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit">submit</button>
+      <button class=" m-auto mt-2 btn bg-custom text-dark" color="primary" mat-flat-button type="submit" i18n>submit</button>
       <!-- <button type="submit" class="btn btn-warning">Create</button>-->
     </form>
   </div>

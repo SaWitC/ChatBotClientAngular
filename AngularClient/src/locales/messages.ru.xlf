@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5975206084857091430" datatype="html">
+        <source>login Page</source>
+        <target>Авторизация</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6432771257968891203" datatype="html">
+        <source>UserName</source>
+        <target>Имя пользователя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5530530003442227985" datatype="html">
+        <source>UserName is required</source>
+        <target>имя пользователя обязательно</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <target>Пароль</target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/register/register.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9150895953971730874" datatype="html">
+        <source>submit</source>
+        <target>Отправить</target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/login/login.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/register/register.component.html</context>
+          <context context-type="linenumber">152</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Chat/create/create.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9147119917047998452" datatype="html">
+        <source>ConfirmPass</source>
+        <target>Повторите пароль</target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/register/register.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5457976463954594964" datatype="html">
+        <source> the confirmation password must be equal to the password </source>
+        <target>Пароли не совпадают</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/register/register.component.html</context>
+          <context context-type="linenumber">69,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6177023042196891932" datatype="html">
+        <source>User name:</source>
+        <target>Имя пользователя</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/user-account/user-account.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1205072394541462689" datatype="html">
+        <source>Phone number:</source>
+        <target>Телефон</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/user-account/user-account.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8209904043600521827" datatype="html">
+        <source>Vk connection</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/user-account/user-account.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1753792481081242188" datatype="html">
+        <source>Conect</source>
+        <target>Подключить</target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/user-account/user-account.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4077282308887949493" datatype="html">
+        <source>send reminder to vk:</source>
+        <target>Отправлять напоминалки в вк</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Account/user-account/user-account.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6792945469773358860" datatype="html">
+        <source>Chat Title</source>
+        <target>Название чата</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Chat/create/create.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4306534249069365093" datatype="html">
+        <source> title is Required </source>
+        <target>Название должно быть заполнено</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/Components/Chat/create/create.component.html</context>
+          <context context-type="linenumber">11,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <target>Логин</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3301086086650990787" datatype="html">
+        <source>Register</source>
+        <target>Регистрация</target>
+
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8869045340693432463" datatype="html">
+        <source>MyChats</source>
+        <target>Мои чаты</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4176622171624928443" datatype="html">
+        <source>CreateChat</source>
+        <target>Создать чат</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

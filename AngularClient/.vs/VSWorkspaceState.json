@@ -4,10 +4,10 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\Components",
-    "\\src\\app\\Components\\Account",
-    "\\src\\app\\Services",
-    "\\src\\app\\Services\\Error"
+    "\\src\\app\\Guards",
+    "\\src\\app\\Guards\\Auth\\AuthGard",
+    "\\src\\locales"
   ],
-  "SelectedNode": "\\src\\app\\Components\\Account\\login",
+  "SelectedNode": "\\angular.json",
   "PreviewInSolutionExplorer": false
 }

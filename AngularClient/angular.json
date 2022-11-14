@@ -4,6 +4,10 @@
   "newProjectRoot": "projects",
   "projects": {
     "AngularClient": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": { "ru-RU": "src/locales/messages.ru.xlf" }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,6 +21,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": [
+              "ru-RU"
+              //"en-US"
+            ],
             "outputPath": "dist/angular-client",
             "index": "src/index.html",
             "main": "src/main.ts",

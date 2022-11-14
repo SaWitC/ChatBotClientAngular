@@ -5,6 +5,7 @@ import { CustomAccountService } from './Services/Account/custom-account.service'
 import { RemindCustomService } from './Services/Commands/Remind/remind.service';
 import * as RoutesPath from './Services/Routes';
 import { NotifySignalRService } from './Services/SignalR/Notify/notify-signal-r.service';
+import { loadTranslations } from '@angular/localize'
 
 @Component({
   selector: 'app-root',
@@ -38,6 +39,11 @@ export class AppComponent implements OnInit {
 
   closeConnection() {
     this.HotifySignlaR.stopConnection();
+  }
+
+  f() {
+    //this.
+    //loadTranslations(Record);
   }
 
 }
